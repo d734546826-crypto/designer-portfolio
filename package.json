@@ -1,0 +1,25 @@
+{
+  "name": "designer-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A static portfolio website for a senior B-end UI/UX designer.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/src/input.css -o ./assets/styles.css --minify",
+    "watch:css": "tailwindcss -i ./assets/src/input.css -o ./assets/styles.css --watch",
+    "dev": "python3 -m http.server 5173",
+    "start": "python3 -m http.server 5173",
+    "check": "grep -R \"https://\\|cdn\\.\\|googleapis\\|unpkg\" index.html assets/vendor README.md || true"
+  },
+  "keywords": [
+    "portfolio",
+    "designer",
+    "ui",
+    "ux"
+  ],
+  "author": "xuanxuancts",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@phosphor-icons/web": "^2.1.2",
+    "tailwindcss": "^3.4.17"
+  }
+}

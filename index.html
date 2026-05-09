@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品集 | 资深 B 端 UI 设计师</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/vendor/phosphor/regular/style.css">
+    <link rel="stylesheet" href="./assets/vendor/phosphor/fill/style.css">
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #E5E5E5;
+        }
+        
+        /* 自定义选中文本颜色 */
+        ::selection {
+            background-color: #FF5C00;
+            color: white;
+        }
+
+        /* 隐藏滚动条但保留滚动功能 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2A2A; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF5C00; 
+        }
+
+        /* 极简网格背景 */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand selection:text-white relative">
+
+    <!-- 顶部导航 -->
+    <nav class="fixed top-0 w-full z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-border">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand"></span>
+                DESIGNER.
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+                <a href="#work" class="hover:text-white transition-colors">作品</a>
+                <a href="#experience" class="hover:text-white transition-colors">经历</a>
+                <a href="#about" class="hover:text-white transition-colors">关于</a>
+                <a href="mailto:hello@example.com" class="px-5 py-2.5 bg-white text-dark-900 rounded-full hover:bg-brand hover:text-white transition-all duration-300 font-semibold">
+                    联系我
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 极简网格背景图层与光效 -->
+    <div class="absolute inset-0 pointer-events-none z-0 h-screen overflow-hidden">
+        <div class="absolute inset-0 bg-grid opacity-50"></div>
+        <div id="light-rays" class="absolute inset-0 mix-blend-screen"></div>
+    </div>
+
+    <main class="relative z-10 pt-32 pb-24">
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-6 pt-20 pb-32">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light text-brand text-xs font-semibold tracking-wide mb-8 border border-brand/20">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+                    </span>
+                    AVAILABLE FOR NEW OPPORTUNITIES
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-8">
+                    构建<span class="text-brand">高效</span>、克制的<br />
+                    企业级数字产品。
+                </h1>
+                <p class="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mb-12">
+                    我是一名专注于 B 端领域的资深 UI/UX 设计师。<br />
+                    擅长化繁为简，将复杂的业务逻辑转化为直观、高效、优雅的用户体验。
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="#work" class="flex items-center gap-2 text-white font-medium hover:text-brand transition-colors group">
+                        查看作品
+                        <i class="ph ph-arrow-down-right text-xl group-hover:translate-x-1 group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                    <a href="mailto:hello@example.com" class="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors group">
+                        获取简历
+                        <i class="ph ph-file-pdf text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="work" class="max-w-7xl mx-auto px-6 py-20">
+            <div class="flex items-end justify-between mb-16">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-2">精选案例</h2>
+                    <p class="text-gray-500">2021 - 2024</p>
+                </div>
+                <div class="hidden md:flex gap-4">
+                    <button class="text-white font-medium border-b-2 border-brand pb-1">全部</button>
+                    <button class="text-gray-500 hover:text-white transition-colors pb-1">SaaS</button>
+                    <button class="text-gray-500 hover:text-white transition-colors pb-1">数据大屏</button>
+                    <button class="text-gray-500 hover:text-white transition-colors pb-1">中后台</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card group cursor-pointer">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
+                        <!-- Placeholder for Project Image -->
+                        <div class="absolute inset-0 flex items-center justify-center p-8">
+                             <!-- 模拟 B 端界面的骨架屏 -->
+                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-6 shadow-2xl flex flex-col gap-4 project-image transition-transform duration-700">
+                                <div class="flex justify-between items-center">
+                                    <div class="w-32 h-6 bg-dark-700 rounded-md"></div>
+                                    <div class="w-8 h-8 bg-dark-700 rounded-full"></div>
+                                </div>
+                                <div class="flex gap-4 flex-1 mt-4">
+                                    <div class="w-48 h-full bg-dark-700 rounded-lg hidden lg:block"></div>
+                                    <div class="flex-1 h-full bg-dark-700 rounded-lg"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <span class="text-white font-medium flex items-center gap-2 bg-black/20 px-6 py-3 rounded-full">
+                                查看详情 <i class="ph ph-arrow-up-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">CloudNexus 云原生管理平台</h3>
+                            <p class="text-gray-400 text-sm">一套服务于开发者的多云资源管理控制台，提升 40% 运维效率。</p>
+                        </div>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">SaaS系统</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card group cursor-pointer mt-0 md:mt-16">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
+                        <!-- Placeholder for Project Image -->
+                        <div class="absolute inset-0 flex items-center justify-center p-8">
+                             <!-- 模拟数据看板界面的骨架屏 -->
+                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-6 shadow-2xl flex flex-col gap-4 project-image transition-transform duration-700">
+                                <div class="w-48 h-6 bg-dark-700 rounded-md mb-2"></div>
+                                <div class="grid grid-cols-3 gap-4 mb-4">
+                                    <div class="h-20 bg-dark-700 rounded-lg"></div>
+                                    <div class="h-20 bg-dark-700 rounded-lg"></div>
+                                    <div class="h-20 bg-dark-700 rounded-lg"></div>
+                                </div>
+                                <div class="flex-1 bg-dark-700 rounded-lg"></div>
+                            </div>
+                        </div>
+                        <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <span class="text-white font-medium flex items-center gap-2 bg-black/20 px-6 py-3 rounded-full">
+                                查看详情 <i class="ph ph-arrow-up-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">DataX 企业数据洞察中枢</h3>
+                            <p class="text-gray-400 text-sm">为管理层提供实时、精准的数据可视化面板，辅助商业决策。</p>
+                        </div>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">数据可视化</span>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card group cursor-pointer">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
+                        <div class="absolute inset-0 flex items-center justify-center p-8">
+                             <!-- 模拟工作流界面的骨架屏 -->
+                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-6 shadow-2xl flex items-center justify-center gap-6 project-image transition-transform duration-700">
+                                <div class="w-32 h-16 bg-dark-700 rounded-lg"></div>
+                                <div class="w-16 h-1 bg-brand"></div>
+                                <div class="w-32 h-16 bg-dark-700 rounded-lg border border-brand text-brand flex items-center justify-center text-xs">Processing</div>
+                                <div class="w-16 h-1 bg-dark-700"></div>
+                                <div class="w-32 h-16 bg-dark-700 rounded-lg"></div>
+                            </div>
+                        </div>
+                        <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <span class="text-white font-medium flex items-center gap-2 bg-black/20 px-6 py-3 rounded-full">
+                                查看详情 <i class="ph ph-arrow-up-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">FlowEngine 业务编排引擎</h3>
+                            <p class="text-gray-400 text-sm">低代码表单与复杂工作流引擎设计，极大降低开发介入成本。</p>
+                        </div>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">低代码</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card group cursor-pointer mt-0 md:mt-16">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
+                        <div class="absolute inset-0 flex items-center justify-center p-8">
+                             <!-- 模拟设计系统界面的骨架屏 -->
+                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-8 shadow-2xl grid grid-cols-2 gap-4 project-image transition-transform duration-700">
+                                <div class="space-y-4">
+                                    <div class="w-12 h-12 bg-brand rounded-full"></div>
+                                    <div class="h-4 w-24 bg-dark-700 rounded"></div>
+                                    <div class="h-8 w-32 bg-dark-700 rounded"></div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="h-10 bg-dark-700 rounded-md"></div>
+                                    <div class="h-10 bg-dark-700 border border-dark-600 rounded-md"></div>
+                                    <div class="flex gap-2">
+                                        <div class="h-6 w-16 bg-dark-700 rounded-full"></div>
+                                        <div class="h-6 w-16 bg-brand rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <span class="text-white font-medium flex items-center gap-2 bg-black/20 px-6 py-3 rounded-full">
+                                查看详情 <i class="ph ph-arrow-up-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">Atom Design System</h3>
+                            <p class="text-gray-400 text-sm">主导从 0 到 1 建立企业级设计规范，包含 50+ 组件与交互模式。</p>
+                        </div>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">设计系统</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Experience & Philosophy -->
+        <section id="experience" class="max-w-7xl mx-auto px-6 py-24 border-t border-dark-border mt-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+                
+                <div class="md:col-span-4">
+                    <h2 class="text-3xl font-bold text-white mb-6">设计理念</h2>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="text-brand font-bold mb-2">01. 逻辑重于表现</div>
+                            <p class="text-gray-400 text-sm leading-relaxed">在 B 端设计中，理清业务链路永远是第一位的。视觉应当服务于信息层级与操作效率，而非喧宾夺主。</p>
+                        </div>
+                        <div>
+                            <div class="text-brand font-bold mb-2">02. 克制与统一</div>
+                            <p class="text-gray-400 text-sm leading-relaxed">减少无意义的装饰，保持全局组件和交互模式的统一，降低用户的学习成本，建立产品信任感。</p>
+                        </div>
+                        <div>
+                            <div class="text-brand font-bold mb-2">03. 懂技术的体验设计</div>
+                            <p class="text-gray-400 text-sm leading-relaxed">理解前端框架和实现成本，能产出可落地的高质量设计方案，与研发团队顺畅协作。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8">
+                    <h2 class="text-3xl font-bold text-white mb-8">工作经历</h2>
+                    <div class="space-y-12 relative before:absolute before:inset-0 before:ml-2.5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark-border before:to-transparent">
+                        
+                        <!-- Timeline Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-dark-900 bg-brand shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10"></div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-brand/50 transition-colors">
+                                <div class="flex flex-col mb-2">
+                                    <span class="text-brand text-sm font-semibold mb-1">2021 至今</span>
+                                    <h4 class="text-lg font-bold text-white">资深交互设计师</h4>
+                                </div>
+                                <div class="text-gray-500 text-sm mb-4">TechVision 科技有限公司</div>
+                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
+                                    <li>负责核心 SaaS 产品的体验架构设计，提升整体易用性。</li>
+                                    <li>主导建立并维护企业级基础组件库，开发效率提升 30%。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-dark-900 bg-dark-700 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10 group-hover:bg-brand transition-colors"></div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-dark-600 transition-colors">
+                                <div class="flex flex-col mb-2">
+                                    <span class="text-gray-400 text-sm font-semibold mb-1">2018 - 2021</span>
+                                    <h4 class="text-lg font-bold text-white">UI/UX 设计师</h4>
+                                </div>
+                                <div class="text-gray-500 text-sm mb-4">DataMind 智能数据</div>
+                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
+                                    <li>参与大数据可视化大屏与中后台管理系统的设计。</li>
+                                    <li>优化复杂表单与数据图表的交互体验。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-dark-border bg-dark-900 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">准备好开始新项目了吗？</h2>
+            <p class="text-gray-400 mb-10 max-w-xl mx-auto">
+                如果您正在寻找一位能深入理解业务逻辑，并产出高质量 B 端设计方案的设计师，欢迎随时与我联系。
+            </p>
+            <a href="mailto:hello@example.com" class="inline-flex items-center gap-2 px-8 py-4 bg-brand text-white rounded-full font-bold hover:bg-brand-hover transition-colors text-lg mb-20 shadow-[0_0_30px_rgba(255,92,0,0.3)] hover:shadow-[0_0_40px_rgba(255,92,0,0.5)]">
+                Say Hello <i class="ph ph-envelope-simple text-xl"></i>
+            </a>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-dark-border pt-10 text-sm text-gray-500">
+                <p>© 2024 UI Designer. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-dribbble-logo text-2xl"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-behance-logo text-2xl"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-linkedin-logo text-2xl"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-github-logo text-2xl"></i></a>
+                </div>
+                <p>Designed with <i class="ph-fill ph-heart text-brand"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 光效动画 (WebGL Vanilla JS Implementation of React Bits LightRays)
+        function initLightRays(containerId, options = {}) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.display = 'block';
+            container.appendChild(canvas);
+
+            const gl = canvas.getContext('webgl', { alpha: true });
+            if (!gl) {
+                console.warn('WebGL not supported');
+                return;
+            }
+
+            const vsSource = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+
+            const fsSource = `
+                precision highp float;
+                uniform float iTime;
+                uniform vec2  iResolution;
+                uniform vec2  rayPos;
+                uniform vec2  rayDir;
+                uniform vec3  raysColor;
+                uniform float raysSpeed;
+                uniform float lightSpread;
+                uniform float rayLength;
+                uniform float pulsating;
+                uniform float fadeDistance;
+                uniform float saturation;
+                uniform vec2  mousePos;
+                uniform float mouseInfluence;
+                uniform float noiseAmount;
+                uniform float distortion;
+
+                float noise(vec2 st) {
+                    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+                }
+
+                float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed) {
+                    vec2 sourceToCoord = coord - raySource;
+                    vec2 dirNorm = normalize(sourceToCoord);
+                    float cosAngle = dot(dirNorm, rayRefDirection);
+                    float distortedAngle = cosAngle + distortion * sin(iTime * 2.0 + length(sourceToCoord) * 0.01) * 0.2;
+                    float spreadFactor = pow(max(distortedAngle, 0.0), 1.0 / max(lightSpread, 0.001));
+                    float distance = length(sourceToCoord);
+                    float maxDistance = iResolution.x * rayLength;
+                    float lengthFalloff = clamp((maxDistance - distance) / maxDistance, 0.0, 1.0);
+                    float fadeFalloff = clamp((iResolution.x * fadeDistance - distance) / (iResolution.x * fadeDistance), 0.5, 1.0);
+                    float pulse = pulsating > 0.5 ? (0.8 + 0.2 * sin(iTime * speed * 3.0)) : 1.0;
+                    float baseStrength = clamp(
+                        (0.45 + 0.15 * sin(distortedAngle * seedA + iTime * speed)) +
+                        (0.3 + 0.2 * cos(-distortedAngle * seedB + iTime * speed)),
+                        0.0, 1.0
+                    );
+                    return baseStrength * lengthFalloff * fadeFalloff * spreadFactor * pulse;
+                }
+
+                void main() {
+                    vec2 coord = vec2(gl_FragCoord.x, iResolution.y - gl_FragCoord.y);
+                    vec2 finalRayDir = rayDir;
+                    if (mouseInfluence > 0.0) {
+                        vec2 mouseScreenPos = mousePos * iResolution.xy;
+                        vec2 mouseDirection = normalize(mouseScreenPos - rayPos);
+                        finalRayDir = normalize(mix(rayDir, mouseDirection, mouseInfluence));
+                    }
+                    vec4 rays1 = vec4(1.0) * rayStrength(rayPos, finalRayDir, coord, 36.2214, 21.11349, 1.5 * raysSpeed);
+                    vec4 rays2 = vec4(1.0) * rayStrength(rayPos, finalRayDir, coord, 22.3991, 18.0234, 1.1 * raysSpeed);
+                    
+                    vec4 fragColor = rays1 * 0.5 + rays2 * 0.4;
+                    
+                    if (noiseAmount > 0.0) {
+                        float n = noise(coord * 0.01 + iTime * 0.1);
+                        fragColor.rgb *= (1.0 - noiseAmount + noiseAmount * n);
+                    }
+                    
+                    float brightness = 1.0 - (coord.y / iResolution.y);
+                    fragColor.x *= 0.1 + brightness * 0.8;
+                    fragColor.y *= 0.3 + brightness * 0.6;
+                    fragColor.z *= 0.5 + brightness * 0.5;
+                    
+                    if (saturation != 1.0) {
+                        float gray = dot(fragColor.rgb, vec3(0.299, 0.587, 0.114));
+                        fragColor.rgb = mix(vec3(gray), fragColor.rgb, saturation);
+                    }
+                    
+                    fragColor.rgb *= raysColor;
+                    gl_FragColor = fragColor;
+                }
+            `;
+
+            function compileShader(type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error(gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            const vs = compileShader(gl.VERTEX_SHADER, vsSource);
+            const fs = compileShader(gl.FRAGMENT_SHADER, fsSource);
+            const program = gl.createProgram();
+            gl.attachShader(program, vs);
+            gl.attachShader(program, fs);
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const vertices = new Float32Array([
+                -1.0, -1.0,
+                 3.0, -1.0,
+                -1.0,  3.0
+            ]);
+            const buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+            const posLoc = gl.getAttribLocation(program, 'position');
+            gl.enableVertexAttribArray(posLoc);
+            gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+            const getLoc = name => gl.getUniformLocation(program, name);
+            const locs = {
+                iTime: getLoc('iTime'),
+                iResolution: getLoc('iResolution'),
+                rayPos: getLoc('rayPos'),
+                rayDir: getLoc('rayDir'),
+                raysColor: getLoc('raysColor'),
+                raysSpeed: getLoc('raysSpeed'),
+                lightSpread: getLoc('lightSpread'),
+                rayLength: getLoc('rayLength'),
+                pulsating: getLoc('pulsating'),
+                fadeDistance: getLoc('fadeDistance'),
+                saturation: getLoc('saturation'),
+                mousePos: getLoc('mousePos'),
+                mouseInfluence: getLoc('mouseInfluence'),
+                noiseAmount: getLoc('noiseAmount'),
+                distortion: getLoc('distortion')
+            };
+
+            const hexToRgb = hex => {
+                const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return m ? [parseInt(m[1], 16)/255, parseInt(m[2], 16)/255, parseInt(m[3], 16)/255] : [1,1,1];
+            };
+
+            const getAnchorAndDir = (w, h) => {
+                return { anchor: [0.5 * w, -0.2 * h], dir: [0, 1] }; // top-center origin
+            };
+
+            const cfg = {
+                raysColor: options.raysColor || '#FF5C00',
+                raysSpeed: 0.8,
+                lightSpread: 1.2,
+                rayLength: 2.0,
+                pulsating: true,
+                fadeDistance: 0.8,
+                saturation: 1.0,
+                mouseInfluence: 0.05,
+                noiseAmount: 0.0,
+                distortion: 0.1
+            };
+
+            let dpr = Math.min(window.devicePixelRatio || 1, 2);
+            let mouse = { x: 0.5, y: 0.5 };
+            let smoothMouse = { x: 0.5, y: 0.5 };
+            let w, h, anchor, dir;
+
+            const resize = () => {
+                const rect = container.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                w = canvas.width;
+                h = canvas.height;
+                const res = getAnchorAndDir(w, h);
+                anchor = res.anchor;
+                dir = res.dir;
+            };
+            window.addEventListener('resize', resize);
+            resize();
+
+            window.addEventListener('mousemove', e => {
+                const rect = container.getBoundingClientRect();
+                mouse.x = (e.clientX - rect.left) / rect.width;
+                mouse.y = (e.clientY - rect.top) / rect.height;
+            });
+
+            const rgb = hexToRgb(cfg.raysColor);
+            let reqId;
+
+            const render = (time) => {
+                gl.clearColor(0,0,0,0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+
+                gl.uniform1f(locs.iTime, time * 0.001);
+                gl.uniform2f(locs.iResolution, w, h);
+                gl.uniform2f(locs.rayPos, anchor[0], anchor[1]);
+                gl.uniform2f(locs.rayDir, dir[0], dir[1]);
+                gl.uniform3f(locs.raysColor, rgb[0], rgb[1], rgb[2]);
+                gl.uniform1f(locs.raysSpeed, cfg.raysSpeed);
+                gl.uniform1f(locs.lightSpread, cfg.lightSpread);
+                gl.uniform1f(locs.rayLength, cfg.rayLength);
+                gl.uniform1f(locs.pulsating, cfg.pulsating ? 1.0 : 0.0);
+                gl.uniform1f(locs.fadeDistance, cfg.fadeDistance);
+                gl.uniform1f(locs.saturation, cfg.saturation);
+
+                const smoothing = 0.92;
+                smoothMouse.x = smoothMouse.x * smoothing + mouse.x * (1 - smoothing);
+                smoothMouse.y = smoothMouse.y * smoothing + mouse.y * (1 - smoothing);
+                gl.uniform2f(locs.mousePos, smoothMouse.x, smoothMouse.y);
+
+                gl.uniform1f(locs.mouseInfluence, cfg.mouseInfluence);
+                gl.uniform1f(locs.noiseAmount, cfg.noiseAmount);
+                gl.uniform1f(locs.distortion, cfg.distortion);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+                reqId = requestAnimationFrame(render);
+            };
+            reqId = requestAnimationFrame(render);
+        }
+
+        // 初始化光效，使用主题色橘色
+        initLightRays('light-rays', { raysColor: '#FF5C00' });
+    </script>
+</body>
+</html>
