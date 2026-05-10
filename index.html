@@ -344,7 +344,7 @@
         <div id="light-rays" class="absolute inset-0 mix-blend-screen"></div>
     </div>
 
-    <main class="relative z-10 pt-32 pb-24">
+    <main class="relative z-10 pt-32 pb-32">
         <!-- Hero Section -->
         <section class="max-w-7xl mx-auto px-6 pt-20 pb-32">
             <div class="max-w-3xl md:max-w-2xl lg:max-w-3xl">
@@ -618,7 +618,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-dark-border bg-dark-900 pt-10 pb-8">
+    <footer class="mt-20 border-t border-dark-border bg-dark-900 pt-16 pb-10">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">联系我</h2>
             <p class="mx-auto mb-7 max-w-xl text-sm leading-relaxed text-gray-400 md:text-base">
@@ -627,8 +627,10 @@
             <a href="mailto:734546826@qq.com" class="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-hover">
                 获取简历 <i class="ph ph-envelope-simple text-lg"></i>
             </a>
+        </div>
 
-            <div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-dark-border pt-6 text-sm text-gray-500">
+        <div class="mt-12 border-t border-dark-border">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 px-6 pt-6 text-center text-sm text-gray-500">
                 <p>© 2026 杜明轩. All rights reserved.</p>
                 <p>Designed with xxcts <i class="ph-fill ph-heart text-brand"></i></p>
             </div>
@@ -722,7 +724,12 @@
                     { type: 'image', src: './assets/cases/rq/入侵检测-5-2.png', alt: '入侵检测方案展示二' },
                     { type: 'image', src: './assets/cases/rq/入侵检测-5-3.png', alt: '入侵检测方案展示三' },
                     { type: 'image', src: './assets/cases/rq/入侵检测-5-4.png', alt: '入侵检测方案展示四' },
-                    { type: 'image', src: './assets/cases/rq/入侵检测-5-5.png', alt: '入侵检测多机图演示静态截图' },
+                    {
+                        type: 'video-frame',
+                        src: './assets/cases/rq/入侵检测-5-5.png',
+                        video: './assets/cases/rq/多机图演示视频.mp4',
+                        alt: '入侵检测多机图演示'
+                    },
                     { type: 'image', src: './assets/cases/rq/入侵检测-5-6.png', alt: '入侵检测方案展示六' }
                 ]
             },
@@ -833,16 +840,26 @@
 
             if (item.type === 'video-frame') {
                 return `
-                    <div class="case-frame relative">
+                    <div class="case-frame relative" data-video-frame>
                         <img src="${item.src}" alt="${item.alt}" class="w-full">
                         <video
-                            src="${item.video}"
-                            class="absolute object-cover"
+                            data-src="${item.video}"
+                            class="absolute object-cover opacity-0 transition-opacity duration-300"
                             style="left: 12.9%; top: 15.3%; width: 74.2%; height: 68.8%; border-radius: 6px;"
                             controls
                             preload="metadata"
                             playsinline
                         ></video>
+                        <button
+                            type="button"
+                            class="absolute flex items-center gap-2 rounded-full bg-dark-900/85 px-4 py-2 text-sm font-semibold text-white shadow-2xl backdrop-blur transition-colors hover:bg-brand"
+                            style="left: 50%; top: 49%; transform: translate(-50%, -50%);"
+                            data-video-play
+                            aria-label="加载并播放多机图演示视频"
+                        >
+                            <i class="ph ph-play-circle text-xl"></i>
+                            点击播放演示
+                        </button>
                     </div>
                 `;
             }
@@ -903,6 +920,22 @@
             mediaItems.forEach(media => lazyMediaObserver.observe(media));
         };
 
+        const setupDeferredVideos = () => {
+            caseModalContent?.querySelectorAll('[data-video-frame]').forEach(frame => {
+                const button = frame.querySelector('[data-video-play]');
+                const video = frame.querySelector('video[data-src]');
+                if (!button || !video) return;
+
+                button.addEventListener('click', () => {
+                    if (!video.src) video.src = video.dataset.src;
+                    video.classList.remove('opacity-0');
+                    video.classList.add('opacity-100');
+                    button.classList.add('hidden');
+                    video.play?.().catch(() => {});
+                }, { once: true });
+            });
+        };
+
         const openCaseModal = caseId => {
             if (!caseModal) return;
             renderCaseStudy(caseId);
@@ -912,6 +945,7 @@
             requestAnimationFrame(() => caseDrawer?.classList.add('is-open'));
             if (caseModalScroll) caseModalScroll.scrollTop = 0;
             requestAnimationFrame(hydrateLazyMedia);
+            requestAnimationFrame(setupDeferredVideos);
         };
 
         const closeCaseModal = () => {
