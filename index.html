@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>作品集 | 资深 B 端 UI 设计师</title>
+    <title>杜明轩 | UI/UX 设计师作品集</title>
     <link rel="stylesheet" href="./assets/styles.css">
     <link rel="stylesheet" href="./assets/vendor/phosphor/regular/style.css">
     <link rel="stylesheet" href="./assets/vendor/phosphor/fill/style.css">
@@ -37,10 +37,151 @@
         /* 极简网格背景 */
         .bg-grid {
             background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            mask-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.14) 0%, rgba(0, 0, 0, 0.18) 42%, rgba(0, 0, 0, 0.92) 100%),
+                linear-gradient(to bottom, black 0%, black 34%, rgba(0, 0, 0, 0.45) 58%, rgba(0, 0, 0, 0.16) 100%);
+            -webkit-mask-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.14) 0%, rgba(0, 0, 0, 0.18) 42%, rgba(0, 0, 0, 0.92) 100%),
+                linear-gradient(to bottom, black 0%, black 34%, rgba(0, 0, 0, 0.45) 58%, rgba(0, 0, 0, 0.16) 100%);
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+        }
+
+        .blueprint-line {
+            stroke-dasharray: var(--dash, 520);
+            stroke-dashoffset: var(--dash, 520);
+            animation: blueprint-line-cycle 7.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+
+        .blueprint-line:nth-of-type(2) {
+            animation-delay: 0.25s;
+        }
+
+        .blueprint-line:nth-of-type(3) {
+            animation-delay: 0.5s;
+        }
+
+        .blueprint-line:nth-of-type(4) {
+            animation-delay: 0.75s;
+        }
+
+        .blueprint-node {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: blueprint-node-cycle 7.2s ease-out infinite;
+        }
+
+        .blueprint-node:nth-child(2) {
+            animation-delay: 0.18s;
+        }
+
+        .blueprint-node:nth-child(3) {
+            animation-delay: 0.36s;
+        }
+
+        .blueprint-node:nth-child(4) {
+            animation-delay: 0.54s;
+        }
+
+        .blueprint-node:nth-child(5) {
+            animation-delay: 0.72s;
+        }
+
+        .blueprint-secondary {
+            stroke-dasharray: var(--dash, 160);
+            stroke-dashoffset: var(--dash, 160);
+            animation: blueprint-secondary-cycle 7.2s ease-out infinite;
+        }
+
+        .blueprint-label {
+            opacity: 0;
+            animation: blueprint-label-cycle 7.2s ease-out infinite;
+        }
+
+        .blueprint-label:nth-child(2) {
+            animation-delay: 0.28s;
+        }
+
+        .blueprint-label:nth-child(3) {
+            animation-delay: 0.56s;
+        }
+
+        @keyframes blueprint-line-cycle {
+            0% {
+                stroke-dashoffset: var(--dash, 520);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.75;
+            }
+            40%,
+            76% {
+                stroke-dashoffset: 0;
+                opacity: 0.75;
+            }
+            92%,
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes blueprint-node-cycle {
+            0%,
+            18% {
+                opacity: 0;
+                transform: scale(0.45);
+            }
+            26%,
+            78% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            92%,
+            100% {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+        }
+
+        @keyframes blueprint-label-cycle {
+            0%,
+            22% {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            34%,
+            72% {
+                opacity: 0.58;
+                transform: translateY(0);
+            }
+            88%,
+            100% {
+                opacity: 0;
+                transform: translateY(-2px);
+            }
+        }
+
+        @keyframes blueprint-secondary-cycle {
+            0%,
+            34% {
+                stroke-dashoffset: var(--dash, 160);
+                opacity: 0;
+            }
+            48%,
+            76% {
+                stroke-dashoffset: 0;
+                opacity: 0.34;
+            }
+            92%,
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
         }
 
         .project-card {
@@ -55,6 +196,79 @@
         .project-card:hover .project-overlay {
             opacity: 1;
         }
+
+        .case-modal-scroll {
+            scrollbar-gutter: stable;
+        }
+
+        .case-frame {
+            overflow: hidden;
+            border-radius: 0.75rem;
+            border: 1px solid #2A2A2A;
+            background: #0A0A0A;
+            isolation: isolate;
+        }
+
+        .case-frame > img {
+            display: block;
+            width: 100%;
+            border-radius: inherit;
+        }
+
+        .case-drawer {
+            transform: translateY(100%);
+            transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .case-drawer.is-open {
+            transform: translateY(0);
+        }
+
+        .motion-cover-shape {
+            animation: motion-cover-morph 4.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+
+        .motion-cover-orbit {
+            animation: motion-cover-orbit 6s linear infinite;
+        }
+
+        .motion-cover-bar {
+            animation: motion-cover-bar 3.6s ease-in-out infinite;
+        }
+
+        @keyframes motion-cover-morph {
+            0%,
+            100% {
+                border-radius: 999px;
+                transform: rotate(0deg) scale(1);
+            }
+            34% {
+                border-radius: 18px;
+                transform: rotate(45deg) scale(0.92);
+            }
+            68% {
+                border-radius: 4px 28px 4px 28px;
+                transform: rotate(90deg) scale(1.08);
+            }
+        }
+
+        @keyframes motion-cover-orbit {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes motion-cover-bar {
+            0%,
+            100% {
+                transform: scaleX(0.35);
+                opacity: 0.35;
+            }
+            50% {
+                transform: scaleX(1);
+                opacity: 0.9;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand selection:text-white relative">
@@ -62,39 +276,86 @@
     <!-- 顶部导航 -->
     <nav class="fixed top-0 w-full z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-border">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-brand"></span>
-                DESIGNER.
+            <a href="#" class="text-xl font-bold tracking-tight text-white">
+                XXCTS
             </a>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
                 <a href="#work" class="hover:text-white transition-colors">作品</a>
                 <a href="#experience" class="hover:text-white transition-colors">经历</a>
                 <a href="#about" class="hover:text-white transition-colors">关于</a>
-                <a href="mailto:hello@example.com" class="px-5 py-2.5 bg-white text-dark-900 rounded-full hover:bg-brand hover:text-white transition-all duration-300 font-semibold">
+                <a href="mailto:734546826@qq.com" class="px-5 py-2.5 bg-white text-dark-900 rounded-full hover:bg-brand hover:text-white transition-all duration-300 font-semibold">
                     联系我
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- 极简网格背景图层与光效 -->
+    <!-- 全站弱网格背景 -->
+    <div class="absolute inset-x-0 top-0 bottom-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute inset-0 bg-grid opacity-80"></div>
+    </div>
+
+    <!-- 首页光效与右侧工程图层 -->
     <div class="absolute inset-0 pointer-events-none z-0 h-screen overflow-hidden">
-        <div class="absolute inset-0 bg-grid opacity-50"></div>
+        <svg class="absolute right-0 top-24 hidden h-[620px] w-[54vw] max-w-[760px] text-brand opacity-85 md:block" viewBox="0 0 760 620" fill="none" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+                <circle class="blueprint-line" style="--dash: 380" cx="260" cy="320" r="80"/>
+                <circle class="blueprint-line" style="--dash: 190" cx="260" cy="320" r="40"/>
+                <path class="blueprint-line" style="--dash: 420" d="M340 320H440M440 320V240H560M440 320V400H600"/>
+                <path class="blueprint-line" style="--dash: 360" d="M500 200H620V280H500V200Z"/>
+                <path class="blueprint-line" style="--dash: 360" d="M520 360H640V440H520V360Z"/>
+                <path class="blueprint-line" style="--dash: 260" d="M180 480H620M180 480v-8M620 480v-8"/>
+                <path class="blueprint-line" style="--dash: 260" d="M180 220H220M220 220V260M220 380V420H180"/>
+                <path class="blueprint-line" style="--dash: 220" d="M540 232H580M540 264H620M560 392H600M560 424H640"/>
+            </g>
+            <g stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity=".42">
+                <path class="blueprint-line" style="--dash: 180" d="M260 240V200M320 260l40-40M320 380l40 40M260 400v40"/>
+            </g>
+            <g stroke="currentColor" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round">
+                <path class="blueprint-secondary" style="--dash: 140" d="M120 180H200M120 180V260"/>
+                <path class="blueprint-secondary" style="--dash: 120" d="M140 420H220M140 420V460"/>
+                <path class="blueprint-secondary" style="--dash: 160" d="M420 180H500M420 180l24-24"/>
+                <path class="blueprint-secondary" style="--dash: 150" d="M620 180H660M660 180V260"/>
+                <path class="blueprint-secondary" style="--dash: 170" d="M660 360H700M700 360V440"/>
+                <path class="blueprint-secondary" style="--dash: 120" d="M460 480V520H540"/>
+                <path class="blueprint-secondary" style="--dash: 100" d="M220 560H300M580 540H660"/>
+            </g>
+            <g fill="currentColor">
+                <circle class="blueprint-node" cx="260" cy="320" r="3.5"/>
+                <circle class="blueprint-node" cx="260" cy="240" r="2.5"/>
+                <circle class="blueprint-node" cx="320" cy="260" r="2.5"/>
+                <circle class="blueprint-node" cx="320" cy="380" r="2.5"/>
+                <circle class="blueprint-node" cx="260" cy="400" r="2.5"/>
+                <circle class="blueprint-node" cx="440" cy="320" r="3"/>
+                <circle class="blueprint-node" cx="560" cy="240" r="3"/>
+                <circle class="blueprint-node" cx="600" cy="400" r="3"/>
+                <circle class="blueprint-node" cx="620" cy="480" r="2.5"/>
+                <circle class="blueprint-node" cx="120" cy="180" r="2"/>
+                <circle class="blueprint-node" cx="660" cy="180" r="2"/>
+                <circle class="blueprint-node" cx="700" cy="360" r="2"/>
+                <circle class="blueprint-node" cx="540" cy="520" r="2"/>
+            </g>
+            <g fill="currentColor" font-family="monospace" font-size="11" letter-spacing=".08em">
+                <text class="blueprint-label" x="180" y="196">CORE CLUSTER</text>
+                <text class="blueprint-label" x="500" y="188">SCATTERED MODULES</text>
+                <text class="blueprint-label" x="300" y="504">PROCESS SPAN</text>
+            </g>
+        </svg>
         <div id="light-rays" class="absolute inset-0 mix-blend-screen"></div>
     </div>
 
     <main class="relative z-10 pt-32 pb-24">
         <!-- Hero Section -->
         <section class="max-w-7xl mx-auto px-6 pt-20 pb-32">
-            <div class="max-w-3xl">
+            <div class="max-w-3xl md:max-w-2xl lg:max-w-3xl">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light text-brand text-xs font-semibold tracking-wide mb-8 border border-brand/20">
                     <span class="relative flex h-2 w-2">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
                     </span>
-                    AVAILABLE FOR NEW OPPORTUNITIES
+                    UI/UX DESIGNER · AI-POWERED B-END DESIGN
                 </div>
-                <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-8">
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.16] mb-8">
                     构建<span class="text-brand">高效</span>、克制的<br />
                     企业级数字产品。
                 </h1>
@@ -107,10 +368,54 @@
                         查看作品
                         <i class="ph ph-arrow-down-right text-xl group-hover:translate-x-1 group-hover:translate-y-1 transition-transform"></i>
                     </a>
-                    <a href="mailto:hello@example.com" class="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors group">
+                    <a href="mailto:734546826@qq.com?subject=简历请求" class="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors group">
                         获取简历
                         <i class="ph ph-file-pdf text-xl"></i>
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Info Section -->
+        <section id="about" class="max-w-7xl mx-auto px-6 pb-12">
+            <div class="border-y border-dark-border py-8">
+                <div class="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-6">
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Name</p>
+                        <p class="text-lg font-bold text-white">杜明轩</p>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Gender</p>
+                        <p class="text-lg font-bold text-white">男</p>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Age</p>
+                        <p class="text-lg font-bold text-white">27</p>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Experience</p>
+                        <p class="text-lg font-bold text-white">5 年</p>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Degree</p>
+                        <p class="text-lg font-bold text-white">本科</p>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Focus</p>
+                        <p class="text-lg font-bold text-white">B 端体验设计</p>
+                    </div>
+                </div>
+                <div class="mt-8 flex flex-col gap-4 border-t border-dark-border pt-6 md:flex-row md:items-center md:justify-between">
+                    <p class="text-sm leading-relaxed text-gray-400 md:max-w-xl">
+                        用结构化设计能力处理复杂业务问题，同时将 AI 融入调研、表达与动效探索，让设计从体验交付延伸到效率赋能。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">Sketch</span>
+                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">Figma</span>
+                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">PS</span>
+                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">AE</span>
+                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">GPT</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -120,34 +425,19 @@
             <div class="flex items-end justify-between mb-16">
                 <div>
                     <h2 class="text-3xl font-bold text-white mb-2">精选案例</h2>
-                    <p class="text-gray-500">2021 - 2024</p>
-                </div>
-                <div class="hidden md:flex gap-4">
-                    <button class="text-white font-medium border-b-2 border-brand pb-1">全部</button>
-                    <button class="text-gray-500 hover:text-white transition-colors pb-1">SaaS</button>
-                    <button class="text-gray-500 hover:text-white transition-colors pb-1">数据大屏</button>
-                    <button class="text-gray-500 hover:text-white transition-colors pb-1">中后台</button>
+                    <p class="text-gray-500">2023 - 2026</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Project 1 -->
-                <div class="project-card group cursor-pointer">
-                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
-                        <!-- Placeholder for Project Image -->
-                        <div class="absolute inset-0 flex items-center justify-center p-8">
-                             <!-- 模拟 B 端界面的骨架屏 -->
-                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-6 shadow-2xl flex flex-col gap-4 project-image transition-transform duration-700">
-                                <div class="flex justify-between items-center">
-                                    <div class="w-32 h-6 bg-dark-700 rounded-md"></div>
-                                    <div class="w-8 h-8 bg-dark-700 rounded-full"></div>
-                                </div>
-                                <div class="flex gap-4 flex-1 mt-4">
-                                    <div class="w-48 h-full bg-dark-700 rounded-lg hidden lg:block"></div>
-                                    <div class="flex-1 h-full bg-dark-700 rounded-lg"></div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="project-card group cursor-pointer" role="button" tabindex="0" data-case-open="jc">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-video mb-6 border border-dark-border">
+                        <img
+                            src="./assets/cases/jc/基础交互优化-0-封面.png"
+                            alt="复杂系统基础交互重构案例封面"
+                            class="project-image h-full w-full object-cover transition-transform duration-700"
+                        >
                         <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
                             <span class="text-white font-medium flex items-center gap-2 bg-black/20 px-6 py-3 rounded-full">
                                 查看详情 <i class="ph ph-arrow-up-right"></i>
@@ -156,29 +446,21 @@
                     </div>
                     <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">CloudNexus 云原生管理平台</h3>
-                            <p class="text-gray-400 text-sm">一套服务于开发者的多云资源管理控制台，提升 40% 运维效率。</p>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">复杂系统基础交互重构</h3>
+                            <p class="text-gray-400 text-sm">围绕企业培训场景，对表格与筛选体验进行系统化升级，提升复杂信息处理效率。</p>
                         </div>
-                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">SaaS系统</span>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">表格 / 筛选</span>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card group cursor-pointer mt-0 md:mt-16">
-                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
-                        <!-- Placeholder for Project Image -->
-                        <div class="absolute inset-0 flex items-center justify-center p-8">
-                             <!-- 模拟数据看板界面的骨架屏 -->
-                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-6 shadow-2xl flex flex-col gap-4 project-image transition-transform duration-700">
-                                <div class="w-48 h-6 bg-dark-700 rounded-md mb-2"></div>
-                                <div class="grid grid-cols-3 gap-4 mb-4">
-                                    <div class="h-20 bg-dark-700 rounded-lg"></div>
-                                    <div class="h-20 bg-dark-700 rounded-lg"></div>
-                                    <div class="h-20 bg-dark-700 rounded-lg"></div>
-                                </div>
-                                <div class="flex-1 bg-dark-700 rounded-lg"></div>
-                            </div>
-                        </div>
+                <div class="project-card group cursor-pointer mt-0 md:mt-16" role="button" tabindex="0" data-case-open="la">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-video mb-6 border border-dark-border">
+                        <img
+                            src="./assets/cases/la/learnanything-1-封面.png"
+                            alt="LearnAnything 企业级 AI 文档转视频工具案例封面"
+                            class="project-image h-full w-full object-cover transition-transform duration-700"
+                        >
                         <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
                             <span class="text-white font-medium flex items-center gap-2 bg-black/20 px-6 py-3 rounded-full">
                                 查看详情 <i class="ph ph-arrow-up-right"></i>
@@ -187,26 +469,21 @@
                     </div>
                     <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">DataX 企业数据洞察中枢</h3>
-                            <p class="text-gray-400 text-sm">为管理层提供实时、精准的数据可视化面板，辅助商业决策。</p>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">LearnAnything AI 文档转视频工具</h3>
+                            <p class="text-gray-400 text-sm">面向企业培训场景，探索 AI 驱动的文档转视频流程，提升内容生产与学习效率。</p>
                         </div>
-                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">数据可视化</span>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">AI 效率工具</span>
                     </div>
                 </div>
                 
                 <!-- Project 3 -->
-                <div class="project-card group cursor-pointer">
-                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
-                        <div class="absolute inset-0 flex items-center justify-center p-8">
-                             <!-- 模拟工作流界面的骨架屏 -->
-                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-6 shadow-2xl flex items-center justify-center gap-6 project-image transition-transform duration-700">
-                                <div class="w-32 h-16 bg-dark-700 rounded-lg"></div>
-                                <div class="w-16 h-1 bg-brand"></div>
-                                <div class="w-32 h-16 bg-dark-700 rounded-lg border border-brand text-brand flex items-center justify-center text-xs">Processing</div>
-                                <div class="w-16 h-1 bg-dark-700"></div>
-                                <div class="w-32 h-16 bg-dark-700 rounded-lg"></div>
-                            </div>
-                        </div>
+                <div class="project-card group cursor-pointer" role="button" tabindex="0" data-case-open="rq">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-video mb-6 border border-dark-border">
+                        <img
+                            src="./assets/cases/rq/入侵检测-1-封面.png"
+                            alt="入侵检测安全运营案例封面"
+                            class="project-image h-full w-full object-cover transition-transform duration-700"
+                        >
                         <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
                             <span class="text-white font-medium flex items-center gap-2 bg-black/20 px-6 py-3 rounded-full">
                                 查看详情 <i class="ph ph-arrow-up-right"></i>
@@ -215,32 +492,30 @@
                     </div>
                     <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">FlowEngine 业务编排引擎</h3>
-                            <p class="text-gray-400 text-sm">低代码表单与复杂工作流引擎设计，极大降低开发介入成本。</p>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">入侵检测安全运营体验设计</h3>
+                            <p class="text-gray-400 text-sm">从告警到事件，重构安全运营链路，整合分散检测能力并提升研判处置效率。</p>
                         </div>
-                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">低代码</span>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">安全产品</span>
                     </div>
                 </div>
 
                 <!-- Project 4 -->
-                <div class="project-card group cursor-pointer mt-0 md:mt-16">
-                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-[4/3] mb-6 border border-dark-border">
-                        <div class="absolute inset-0 flex items-center justify-center p-8">
-                             <!-- 模拟设计系统界面的骨架屏 -->
-                            <div class="w-full h-full bg-dark-900 rounded-xl border border-dark-border p-8 shadow-2xl grid grid-cols-2 gap-4 project-image transition-transform duration-700">
-                                <div class="space-y-4">
-                                    <div class="w-12 h-12 bg-brand rounded-full"></div>
-                                    <div class="h-4 w-24 bg-dark-700 rounded"></div>
-                                    <div class="h-8 w-32 bg-dark-700 rounded"></div>
-                                </div>
-                                <div class="space-y-4">
-                                    <div class="h-10 bg-dark-700 rounded-md"></div>
-                                    <div class="h-10 bg-dark-700 border border-dark-600 rounded-md"></div>
-                                    <div class="flex gap-2">
-                                        <div class="h-6 w-16 bg-dark-700 rounded-full"></div>
-                                        <div class="h-6 w-16 bg-brand rounded-full"></div>
-                                    </div>
-                                </div>
+                <div class="project-card group cursor-pointer mt-0 md:mt-16" role="button" tabindex="0" data-case-open="motion">
+                    <div class="relative overflow-hidden bg-dark-800 rounded-2xl aspect-video mb-6 border border-dark-border">
+                        <div class="project-image relative h-full w-full overflow-hidden bg-dark-900 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-grid opacity-35"></div>
+                            <div class="absolute left-10 top-8 text-xs font-semibold uppercase tracking-[0.28em] text-brand">Motion Studies</div>
+                            <div class="absolute left-10 top-16 max-w-xs text-2xl font-bold leading-tight text-white">
+                                AI 辅助动效与微交互探索
+                            </div>
+                            <div class="absolute bottom-9 left-10 h-1 w-44 origin-left rounded-full bg-brand motion-cover-bar"></div>
+                            <div class="absolute right-16 top-1/2 h-44 w-44 -translate-y-1/2 rounded-full border border-brand/30 motion-cover-orbit">
+                                <span class="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-brand"></span>
+                                <span class="absolute bottom-6 right-4 h-1.5 w-1.5 rounded-full bg-white/50"></span>
+                            </div>
+                            <div class="motion-cover-shape absolute right-28 top-1/2 h-24 w-24 -translate-y-1/2 bg-brand shadow-[0_0_40px_rgba(255,92,0,0.4)]"></div>
+                            <div class="absolute bottom-8 right-10 rounded-full border border-dark-border bg-dark-800/70 px-3 py-1 text-xs text-gray-300 backdrop-blur-sm">
+                                Loading / Homepage / Brand Motion
                             </div>
                         </div>
                         <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
@@ -251,10 +526,10 @@
                     </div>
                     <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">Atom Design System</h3>
-                            <p class="text-gray-400 text-sm">主导从 0 到 1 建立企业级设计规范，包含 50+ 组件与交互模式。</p>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand transition-colors">动效设计与微交互合集</h3>
+                            <p class="text-gray-400 text-sm">整理加载反馈、首页氛围、品牌运营等动效探索，让界面状态更有节奏与情绪。</p>
                         </div>
-                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">设计系统</span>
+                        <span class="text-xs text-gray-500 border border-dark-border px-3 py-1 rounded-full">动效设计</span>
                     </div>
                 </div>
 
@@ -284,37 +559,52 @@
                 </div>
 
                 <div class="md:col-span-8">
-                    <h2 class="text-3xl font-bold text-white mb-8">工作经历</h2>
-                    <div class="space-y-12 relative before:absolute before:inset-0 before:ml-2.5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark-border before:to-transparent">
+                    <div class="space-y-12 relative before:absolute before:inset-y-0 before:left-3 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark-border before:to-transparent md:before:left-1/2 md:before:-translate-x-1/2">
                         
                         <!-- Timeline Item -->
                         <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                            <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-dark-900 bg-brand shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10"></div>
+                            <div class="absolute left-0 top-1/2 z-10 h-6 w-6 -translate-y-1/2 rounded-full border-4 border-dark-900 bg-brand shadow md:left-1/2 md:-translate-x-1/2"></div>
                             <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-brand/50 transition-colors">
                                 <div class="flex flex-col mb-2">
-                                    <span class="text-brand text-sm font-semibold mb-1">2021 至今</span>
-                                    <h4 class="text-lg font-bold text-white">资深交互设计师</h4>
+                                    <span class="text-brand text-sm font-semibold mb-1">2020.09 至今</span>
+                                    <h4 class="text-lg font-bold text-white">中级 UI/UX 设计师</h4>
                                 </div>
-                                <div class="text-gray-500 text-sm mb-4">TechVision 科技有限公司</div>
+                                <div class="text-gray-500 text-sm mb-4">青藤云安全</div>
                                 <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
-                                    <li>负责核心 SaaS 产品的体验架构设计，提升整体易用性。</li>
-                                    <li>主导建立并维护企业级基础组件库，开发效率提升 30%。</li>
+                                    <li>负责多个核心安全产品的视觉、体验与动效设计，覆盖告警监控、事件研判、配置管理等复杂 B 端场景。</li>
+                                    <li>参与产品从需求理解、交互方案、视觉落地到研发协作的完整流程，推动安全业务体验持续优化。</li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Timeline Item -->
                         <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                            <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-dark-900 bg-dark-700 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10 group-hover:bg-brand transition-colors"></div>
+                            <div class="absolute left-0 top-1/2 z-10 h-6 w-6 -translate-y-1/2 rounded-full border-4 border-dark-900 bg-dark-700 shadow transition-colors group-hover:bg-brand md:left-1/2 md:-translate-x-1/2"></div>
                             <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-dark-600 transition-colors">
                                 <div class="flex flex-col mb-2">
-                                    <span class="text-gray-400 text-sm font-semibold mb-1">2018 - 2021</span>
-                                    <h4 class="text-lg font-bold text-white">UI/UX 设计师</h4>
+                                    <span class="text-gray-400 text-sm font-semibold mb-1">2019.07 - 2019.12</span>
+                                    <h4 class="text-lg font-bold text-white">视觉设计实习生</h4>
                                 </div>
-                                <div class="text-gray-500 text-sm mb-4">DataMind 智能数据</div>
+                                <div class="text-gray-500 text-sm mb-4">航班管家 · 高铁管家设计部</div>
                                 <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
-                                    <li>参与大数据可视化大屏与中后台管理系统的设计。</li>
-                                    <li>优化复杂表单与数据图表的交互体验。</li>
+                                    <li>参与基础组件库与运营组件库的运营维护，协助提升设计资产复用效率。</li>
+                                    <li>负责运营设计、页面设计与动效设计支持，积累从视觉表达到业务转化的设计经验。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div class="absolute left-0 top-1/2 z-10 h-6 w-6 -translate-y-1/2 rounded-full border-4 border-dark-900 bg-dark-700 shadow transition-colors group-hover:bg-brand md:left-1/2 md:-translate-x-1/2"></div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-dark-600 transition-colors">
+                                <div class="flex flex-col mb-2">
+                                    <span class="text-gray-400 text-sm font-semibold mb-1">2016 - 2020</span>
+                                    <h4 class="text-lg font-bold text-white">视觉传达设计专业</h4>
+                                </div>
+                                <div class="text-gray-500 text-sm mb-4">江汉大学</div>
+                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
+                                    <li>系统学习视觉设计、版式构成、品牌表达与信息传达方法，建立扎实的视觉基础。</li>
+                                    <li>在平面视觉与数字界面之间形成跨媒介设计思维，为后续 UI/UX 设计实践打下基础。</li>
                                 </ul>
                             </div>
                         </div>
@@ -328,28 +618,42 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-dark-border bg-dark-900 pt-20 pb-10">
+    <footer class="border-t border-dark-border bg-dark-900 pt-10 pb-8">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">准备好开始新项目了吗？</h2>
-            <p class="text-gray-400 mb-10 max-w-xl mx-auto">
+            <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">联系我</h2>
+            <p class="mx-auto mb-7 max-w-xl text-sm leading-relaxed text-gray-400 md:text-base">
                 如果您正在寻找一位能深入理解业务逻辑，并产出高质量 B 端设计方案的设计师，欢迎随时与我联系。
             </p>
-            <a href="mailto:hello@example.com" class="inline-flex items-center gap-2 px-8 py-4 bg-brand text-white rounded-full font-bold hover:bg-brand-hover transition-colors text-lg mb-20 shadow-[0_0_30px_rgba(255,92,0,0.3)] hover:shadow-[0_0_40px_rgba(255,92,0,0.5)]">
-                Say Hello <i class="ph ph-envelope-simple text-xl"></i>
+            <a href="mailto:734546826@qq.com" class="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-hover">
+                获取简历 <i class="ph ph-envelope-simple text-lg"></i>
             </a>
 
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-dark-border pt-10 text-sm text-gray-500">
-                <p>© 2024 UI Designer. All rights reserved.</p>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-dribbble-logo text-2xl"></i></a>
-                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-behance-logo text-2xl"></i></a>
-                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-linkedin-logo text-2xl"></i></a>
-                    <a href="#" class="hover:text-white transition-colors"><i class="ph ph-github-logo text-2xl"></i></a>
-                </div>
-                <p>Designed with <i class="ph-fill ph-heart text-brand"></i></p>
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-dark-border pt-6 text-sm text-gray-500">
+                <p>© 2026 杜明轩. All rights reserved.</p>
+                <p>Designed with xxcts <i class="ph-fill ph-heart text-brand"></i></p>
             </div>
         </div>
     </footer>
+
+    <!-- Case Modal -->
+    <div id="case-modal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-md" aria-hidden="true">
+        <button type="button" class="absolute inset-0 h-full w-full cursor-default" data-case-close aria-label="关闭案例弹窗"></button>
+        <div id="case-drawer" class="case-drawer absolute bottom-0 left-0 right-0 z-10 flex h-[96vh] flex-col px-4 pb-5 pt-1 md:px-8">
+            <div class="mb-1 flex items-start justify-between gap-6 px-1 py-0">
+                <div class="max-w-3xl text-left">
+                    <p class="text-xs font-semibold uppercase tracking-[0.24em] text-brand">Case Study</p>
+                    <h3 id="case-modal-title" class="mt-0.5 text-lg font-bold text-white">复杂系统基础交互重构</h3>
+                    <p id="case-modal-description" class="mt-1 text-sm leading-relaxed text-gray-400"></p>
+                </div>
+                <button type="button" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-dark-border bg-dark-900/70 text-gray-400 shadow-2xl transition-colors hover:border-brand hover:text-white" data-case-close aria-label="关闭">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+            <div class="case-modal-scroll overflow-y-auto rounded-2xl border border-dark-border bg-dark-900/80 p-4 pr-6 md:p-6 md:pr-8">
+                <div id="case-modal-content" class="space-y-5"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // 简单的平滑滚动
@@ -360,6 +664,284 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        const caseModal = document.getElementById('case-modal');
+        const caseDrawer = document.getElementById('case-drawer');
+        const caseModalScroll = caseModal?.querySelector('.case-modal-scroll');
+        const caseModalTitle = document.getElementById('case-modal-title');
+        const caseModalDescription = document.getElementById('case-modal-description');
+        const caseModalContent = document.getElementById('case-modal-content');
+        const caseOpeners = document.querySelectorAll('[data-case-open]');
+        const caseClosers = document.querySelectorAll('[data-case-close]');
+        const caseStudies = {
+            jc: {
+                title: '复杂系统基础交互重构',
+                description: '围绕企业培训场景，对表格与筛选体验进行系统化升级，提升复杂信息处理效率。',
+                images: [
+                    '基础交互优化-0-封面.png',
+                    '基础交互优化-1-项目介绍.png',
+                    '基础交互优化-2-项目目标.png',
+                    '基础交互优化-3-设计问题.png',
+                    '基础交互优化-4-用户体验分析.png',
+                    '基础交互优化-5-方案论证.png',
+                    '基础交互优化-6-方案展示.png',
+                    '基础交互优化-6-最终方案展示-1.png',
+                    '基础交互优化-6-最终方案展示-2.png',
+                    '基础交互优化-6-最终方案展示-3.png',
+                    '基础交互优化-6-最终方案展示-4.png',
+                    '基础交互优化-6-最终方案展示-5.png',
+                    '基础交互优化-7-项目总结与落地推进.png'
+                ].map(name => ({ type: 'image', src: `./assets/cases/jc/${name}`, alt: name.replace('.png', '') }))
+            },
+            la: {
+                title: 'LearnAnything AI 文档转视频工具',
+                description: '面向企业培训场景，探索 AI 驱动的文档转视频流程，提升内容生产与学习效率。',
+                images: [
+                    'learnanything-1-封面.png',
+                    'learnanything-2-项目介绍.png',
+                    'learnanything-3-背景与挑战.png',
+                    'learnanything-4-设计问题与目标.png',
+                    'learnanything-5-竞品调研.png',
+                    'learnanything-6-交互策略.png',
+                    'learnanything-7-1.png',
+                    'learnanything-7-2.png',
+                    'learnanything-7-3.png',
+                    'learnanything-7-4.png'
+                ].map(name => ({ type: 'image', src: `./assets/cases/la/${name}`, alt: name.replace('.png', '') }))
+            },
+            rq: {
+                title: '入侵检测安全运营体验设计',
+                description: '围绕告警监控、事件研判与响应处置链路，构建更高效的 B 端安全运营体验。',
+                images: [
+                    { type: 'image', src: './assets/cases/rq/入侵检测-1-封面.png', alt: '入侵检测封面' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-2-项目目标&核心业务.png', alt: '入侵检测项目目标与核心业务' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-3-设计问题与目标.png', alt: '入侵检测设计问题与目标' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-4-项目目标&核心业务.png', alt: '入侵检测核心业务' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-5-1.png', alt: '入侵检测方案展示一' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-5-2.png', alt: '入侵检测方案展示二' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-5-3.png', alt: '入侵检测方案展示三' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-5-4.png', alt: '入侵检测方案展示四' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-5-5.png', alt: '入侵检测多机图演示静态截图' },
+                    { type: 'image', src: './assets/cases/rq/入侵检测-5-6.png', alt: '入侵检测方案展示六' }
+                ]
+            },
+            motion: {
+                title: '动效设计与微交互合集',
+                description: '覆盖加载反馈、首页氛围、品牌运营和移动端状态动效，部分方案通过 AI 辅助生成与调试，提升动效探索效率。',
+                images: [
+                    {
+                        type: 'section',
+                        title: '首页氛围动效',
+                        description: '围绕 AI 产品首页的第一眼感知，探索光流、极光、输入动效与消息提示的组合节奏。'
+                    },
+                    { type: 'html-preview', src: './assets/cases/other/首页动效1（AI）.html', title: 'Aurora Motion 首页氛围方案', ai: true, ratio: '16 / 10' },
+                    { type: 'html-preview', src: './assets/cases/other/首页动效2（AI）.html', title: 'Jellyfish 首页动效方案', ai: true, ratio: '16 / 10' },
+                    {
+                        type: 'section',
+                        title: 'AI 工具加载反馈',
+                        description: '面向文档转视频与智能生成任务，设计更具语义的等待反馈，降低用户等待焦虑。'
+                    },
+                    { type: 'html-preview', src: './assets/cases/other/LA加载动效1（AI）.html', title: '视频打板 Loading 动效', ai: true, ratio: '2 / 1' },
+                    { type: 'html-preview', src: './assets/cases/other/LA加载动效2（AI）.html', title: '文档生成 Loading 动效', ai: true, ratio: '2 / 1' },
+                    { type: 'html-preview', src: './assets/cases/other/机器人加载动效（AI）.html', title: '机器人状态反馈动效', ai: true, ratio: '2 / 1' },
+                    {
+                        type: 'section',
+                        title: '品牌与运营动效',
+                        description: '用于活动页、运营页和品牌触点的轻量动效，强调识别度、情绪和完成感。'
+                    },
+                    {
+                        type: 'gif-grid',
+                        columns: 'md:grid-cols-2',
+                        items: [
+                            { src: './assets/cases/other/无相加载动效1.gif', title: '无相加载动效 01', zoom: 2 },
+                            { src: './assets/cases/other/无相加载动效2.gif', title: '无相加载动效 02', zoom: 2 }
+                        ]
+                    },
+                    {
+                        type: 'section',
+                        title: '移动端加载动效',
+                        description: '针对高铁管家移动端场景，探索轻量、连续、可循环的等待状态表达。'
+                    },
+                    {
+                        type: 'gif-grid',
+                        columns: 'grid-cols-3',
+                        items: [
+                            { src: './assets/cases/other/高铁加载动效1.gif', title: '高铁加载动效 01', width: 1125, height: 2121 },
+                            { src: './assets/cases/other/高铁加载动效2.gif', title: '高铁加载动效 02', width: 1125, height: 2121 },
+                            { src: './assets/cases/other/高铁加载动效3.gif', title: '高铁加载动效 03', width: 1125, height: 2121 }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        const renderCaseItem = item => {
+            if (item.type === 'section') {
+                return `
+                    <section class="pt-8">
+                        <div class="mb-4 h-px w-full bg-gradient-to-r from-brand/60 via-dark-border to-transparent"></div>
+                        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-brand">Motion Category</p>
+                        <h4 class="mt-2 text-2xl font-bold text-white">${item.title}</h4>
+                        <p class="mt-3 max-w-3xl text-sm leading-relaxed text-gray-400">${item.description}</p>
+                    </section>
+                `;
+            }
+
+            if (item.type === 'html-preview') {
+                const aiBadge = item.ai ? '<span class="rounded-full border border-brand/30 bg-brand-light px-2.5 py-1 text-xs font-semibold text-brand">AI 辅助</span>' : '';
+                return `
+                    <div class="case-frame">
+                        <div class="flex items-center justify-between border-b border-dark-border bg-dark-800 px-4 py-3">
+                            <h5 class="text-sm font-semibold text-white">${item.title}</h5>
+                            <div class="flex items-center gap-2">
+                                ${aiBadge}
+                                <span class="text-xs text-gray-500">HTML Motion</span>
+                            </div>
+                        </div>
+                        <div class="relative overflow-hidden" style="aspect-ratio: ${item.ratio || '16 / 10'};">
+                            <div class="absolute inset-0 flex items-center justify-center bg-white text-xs font-semibold uppercase tracking-[0.18em] text-gray-300">
+                                Scroll to Load
+                            </div>
+                            <iframe data-lazy-media data-src="${item.src}" title="${item.title}" class="absolute inset-0 h-full w-full border-0 bg-white opacity-0 transition-opacity duration-500" loading="lazy" scrolling="no"></iframe>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (item.type === 'gif-grid') {
+                return `
+                    <div class="grid ${item.columns || 'grid-cols-1 md:grid-cols-2'} gap-5">
+                        ${item.items.map(gif => `
+                            <figure class="case-frame">
+                                <img
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
+                                    data-lazy-media
+                                    data-src="${gif.src}"
+                                    alt="${gif.title}"
+                                    width="${gif.width || 1440}"
+                                    height="${gif.height || 900}"
+                                    class="opacity-0 transition-opacity duration-500"
+                                    style="${gif.zoom ? `transform: scale(${gif.zoom});` : ''}"
+                                >
+                                <figcaption class="border-t border-dark-border bg-dark-800 px-4 py-3 text-sm text-gray-300">${gif.title}</figcaption>
+                            </figure>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            if (item.type === 'video-frame') {
+                return `
+                    <div class="case-frame relative">
+                        <img src="${item.src}" alt="${item.alt}" class="w-full">
+                        <video
+                            src="${item.video}"
+                            class="absolute object-cover"
+                            style="left: 12.9%; top: 15.3%; width: 74.2%; height: 68.8%; border-radius: 6px;"
+                            controls
+                            preload="metadata"
+                            playsinline
+                        ></video>
+                    </div>
+                `;
+            }
+
+            return `<div class="case-frame"><img src="${item.src}" alt="${item.alt}"></div>`;
+        };
+
+        const renderCaseStudy = caseId => {
+            const study = caseStudies[caseId];
+            if (!study || !caseModalContent) return;
+            if (caseModalTitle) caseModalTitle.textContent = study.title;
+            if (caseModalDescription) caseModalDescription.textContent = study.description;
+            caseModalContent.innerHTML = study.images.map(renderCaseItem).join('');
+        };
+
+        let lazyMediaObserver = null;
+
+        const destroyLazyMediaObserver = () => {
+            lazyMediaObserver?.disconnect();
+            lazyMediaObserver = null;
+        };
+
+        const loadLazyMedia = media => {
+            if (!media || media.dataset.lazyLoaded === 'true') return;
+            const src = media.dataset.src;
+            if (!src) return;
+
+            media.dataset.lazyLoaded = 'true';
+            media.addEventListener('load', () => {
+                media.classList.remove('opacity-0');
+                media.classList.add('opacity-100');
+            }, { once: true });
+            media.src = src;
+        };
+
+        const hydrateLazyMedia = () => {
+            destroyLazyMediaObserver();
+            const mediaItems = caseModalContent?.querySelectorAll('[data-lazy-media]');
+            if (!mediaItems?.length) return;
+
+            if (!('IntersectionObserver' in window)) {
+                mediaItems.forEach(loadLazyMedia);
+                return;
+            }
+
+            lazyMediaObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    loadLazyMedia(entry.target);
+                    lazyMediaObserver?.unobserve(entry.target);
+                });
+            }, {
+                root: caseModalScroll || null,
+                rootMargin: '520px 0px',
+                threshold: 0.01
+            });
+
+            mediaItems.forEach(media => lazyMediaObserver.observe(media));
+        };
+
+        const openCaseModal = caseId => {
+            if (!caseModal) return;
+            renderCaseStudy(caseId);
+            caseModal.classList.remove('hidden');
+            caseModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => caseDrawer?.classList.add('is-open'));
+            if (caseModalScroll) caseModalScroll.scrollTop = 0;
+            requestAnimationFrame(hydrateLazyMedia);
+        };
+
+        const closeCaseModal = () => {
+            if (!caseModal) return;
+            destroyLazyMediaObserver();
+            caseDrawer?.classList.remove('is-open');
+            window.setTimeout(() => {
+                caseModal.classList.add('hidden');
+                caseModal.setAttribute('aria-hidden', 'true');
+                if (caseModalContent) caseModalContent.innerHTML = '';
+            }, 260);
+            document.body.style.overflow = '';
+        };
+
+        caseOpeners.forEach(opener => {
+            opener.addEventListener('click', () => openCaseModal(opener.dataset.caseOpen));
+            opener.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openCaseModal(opener.dataset.caseOpen);
+                }
+            });
+        });
+
+        caseClosers.forEach(closer => {
+            closer.addEventListener('click', closeCaseModal);
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeCaseModal();
         });
 
         // 光效动画 (WebGL Vanilla JS Implementation of React Bits LightRays)

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器人动画预览 - 顺滑上弧线转头</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a24;
+        }
+
+        svg {
+            width: 190px;
+            height: 190px;
+        }
+
+        /* 动画：快速眨眼两下 */
+        #eye1-anim, #eye2-anim {
+            transform-origin: center;
+            transform-box: fill-box;
+            animation: fastBlink 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* 头部（脸部白底、天线）：配合主体的位移 */
+        #head-shape {
+            /* 
+               为了保证从左到上再到右的弧线过程中完全没有顿感，
+               这里将 cubic-bezier 调整为更有利于中间平滑穿过的曲线(甚至接近 linear)，
+               或者干脆用 ease-in-out，让动作最两端慢，中间过程保持连贯速度。
+            */
+            animation: headShift 6s ease-in-out infinite;
+        }
+
+        /* 眼镜及眼睛整体：X轴(左右)、Y轴(上下)位移 + 宽度压缩 */
+        #glasses-group {
+            transform-origin: 16px 18.5px;
+            animation: glassesShift 6s ease-in-out infinite;
+        }
+        
+        /* 左耳 */
+        #ear1-anim { 
+            transform-origin: 5.8px 18.2px; 
+            animation: leftEarShift 6s ease-in-out infinite;
+        }
+        
+        /* 右耳 */
+        #ear2-anim { 
+            transform-origin: 26.1px 18.2px; 
+            animation: rightEarShift 6s ease-in-out infinite;
+        }
+
+        /* 修改：在回到原点（0%/100%附近）时快速连续眨眼两次 */
+        @keyframes fastBlink {
+            0%, 4%, 7%, 10%, 15%, 100% { transform: scaleY(1); }
+            5%, 6% { transform: scaleY(0.1); }  /* 第一次眨眼 */
+            8%, 9% { transform: scaleY(0.1); }  /* 第二次眨眼 */
+        }
+
+        /* 
+           ---------------- 动画节奏重新规划 ----------------
+           为了让“上方”只是一个路过的点，它不再是某个拥有足够停留时间的独立关键帧。
+           20%: 开始往左转到达最左极限
+           50%: 从左侧往右侧划过，中间在上方达到最高点，不停留
+           80%: 划到右侧极限
+           100%: 回到正中间
+        */
+
+        @keyframes headShift {
+            0% { transform: translate(0px, 0px); }
+            /* 左端点 */
+            20% { transform: translate(-1.5px, 0px); } 
+            
+            /* 中间经过上方，不停留，配合左右位移从-1.5变成1.5，这里只是Y轴有一个顶峰 */
+            50% { transform: translate(0px, -1.5px); }
+            
+            /* 右端点 */
+            80% { transform: translate(1.5px, 0px); }  
+            100% { transform: translate(0px, 0px); }
+        }
+
+        @keyframes glassesShift {
+            0% { transform: translate(0px, 0px) scale(1, 1); }
+            
+            /* 左端点：宽度被压缩 */
+            20% { transform: translate(-4.5px, 0px) scale(0.75, 1); } 
+            
+            /* 经过上方最高点：此时横向位移为0（经过正中间），高度由于抬头被微缩，宽度因回到正面恢复为1 */
+            50% { transform: translate(0px, -2.5px) scale(1, 0.85); }
+            
+            /* 右端点：宽度被压缩 */
+            80% { transform: translate(4.5px, 0px) scale(0.75, 1); } 
+            100% { transform: translate(0px, 0px) scale(1, 1); }
+        }
+
+        /* 耳朵透视修改规则：
+           面朝方向（远端）的耳朵：彻底消失 / 被遮挡 (scale: 0)
+           背朝方向（近端）的耳朵：虽在正面但也因透视发生一些明显的缩减 (这里设定压缩为 0.5 或者 0.6)
+        */
+        @keyframes leftEarShift {
+            /* 正面常态 */
+            0% { transform: translateX(0px) scale(1, 1); opacity: 1; }
+            
+            /* 脸往左转 -> 左边成为后背（同侧） -> 彻底消失 */
+            20% { transform: translateX(3px) scale(0, 1); opacity: 0; } 
+            
+            /* 往上看路过 -> 恢复常态略往下走 */
+            50% { transform: translate(0px, 1.5px) scale(1, 1); opacity: 1; }
+            
+            /* 脸往右转 -> 左边成为完全可见的面（另一侧） -> 缩小一半 */
+            80% { transform: translateX(1.5px) scale(0.5, 1); opacity: 1; } 
+            100% { transform: translateX(0px) scale(1, 1); opacity: 1; }
+        }
+
+        @keyframes rightEarShift {
+            0% { transform: translateX(0px) scale(1, 1); opacity: 1; }
+            
+            /* 脸往左转 -> 右侧成为可见的面 -> 缩小一半 */
+            20% { transform: translateX(-1.5px) scale(0.5, 1); opacity: 1; } 
+            
+            /* 往上看路过 */
+            50% { transform: translate(0px, 1.5px) scale(1, 1); opacity: 1; }
+            
+            /* 脸往右转 -> 右边成为后背（同侧） -> 彻底消失 */
+            80% { transform: translateX(-3px) scale(0, 1); opacity: 0; } 
+            100% { transform: translateX(0px) scale(1, 1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>机器人</title>
+    <defs>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="1.04083409e-14%" id="linearGradient-1">
+            <stop stop-color="#7D30FF" offset="0%"></stop>
+            <stop stop-color="#1B89FC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="30.8291914%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#CBC9D7" offset="100%"></stop>
+        </linearGradient>
+        <ellipse id="path-3" cx="16" cy="18.5263158" rx="10.1052632" ry="9.47368421"></ellipse>
+        <filter x="-9.9%" y="-10.6%" width="119.8%" height="121.1%" filterUnits="objectBoundingBox" id="filter-4">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="-1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.918323864 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="30.8291914%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#CBC9D7" offset="100%"></stop>
+        </linearGradient>
+        <path d="M16,4 C17.0464343,4 17.8947368,4.84830258 17.8947368,5.89473684 C17.8947368,6.64841866 17.4546859,7.29932108 16.8174998,7.60452827 L17.2631579,9.68421053 L14.7368421,9.68421053 L15.1825002,7.60452827 C14.5453141,7.29932108 14.1052632,6.64841866 14.1052632,5.89473684 C14.1052632,4.84830258 14.9535657,4 16,4 Z" id="path-6"></path>
+        <filter x="-52.8%" y="-35.2%" width="205.6%" height="170.4%" filterUnits="objectBoundingBox" id="filter-7">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="-1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.918323864 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <pattern id="pattern-8" width="100%" height="100%" patternUnits="objectBoundingBox">
+            <use xlink:href="#image-9"></use>
+        </pattern>
+        <image id="image-9" width="18" height="12" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAMCAYAAABvEu28AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEqADAAQAAAABAAAADAAAAABFeZu2AAABuElEQVQoFV2Ty04DMQxFb6aZdloBgpYVe8QS8Tv8Id/BD7BFbEBIVKpEoUAf08eEc0NHAkYY24l9YsdpuLlOadGRPpFZlN5KadKVxshzJT31pbq3lbLspHIvsZE6liQVjeIxMV3sEoGVv02QDH8lx3HCV+EAEg1o5TfoZCP12euT1EOXiL+6AER1XfxFANIm/6/IByBxBKgGsiLxAD3YAw1zqw+09u5gA9oW/7TFHgfFU0BbSl8DchVDfMOPyPN3P5BeDBmwaCm5i+gqKLVtWYAq1rNPEhw1OBuM84V0MTdKurvEGSEGujq36iQAPxr2DJs/+Wqsd/zbEl9jz1Z0M5WqYaHNVVA6JIZpeirJp7YVYGaQu6AwrYEYMEdPkUfot2yUdwescsjZWomeE9NJnoJbZKyGZhCdZwgFaMGeq5zsQW/owCMrxj2z1Cy3SkzlB8Ym7yYAjB/YawJW6CX6E/2OTDhwitTYgUsrZvRT8R74mjydRqFyZQTwZqIT3Y5Bvlv7rsJV2XfLTm94H+ELiTEPJTGVZGB+fEHRwbmaX6AvbGaU131/vle/j2CYe+/sfwNUrB0w7usb8s3yr/9FMJMAAAAASUVORK5CYII="></image>
+        <path d="M11.8666735,13.633745 C13.244449,13.5270378 14.6222245,13.4736842 16,13.4736842 C17.3777755,13.4736842 18.755551,13.5270378 20.1333265,13.633745 C22.4334373,13.8133668 24.2088803,15.7313326 24.2105263,18.0384457 L24.2105263,19.2473273 C24.2084585,21.4800505 22.541983,23.3608155 20.3257607,23.6317695 C18.8838405,23.807081 17.4419202,23.8947368 16,23.8947368 C14.5580798,23.8947368 13.1161595,23.807081 11.6742393,23.6317695 C9.45801704,23.3608155 7.79154146,21.4800505 7.78947368,19.2473273 L7.78947368,18.0384457 C7.79111965,15.7313326 9.56656271,13.8133668 11.8666735,13.633745 Z" id="path-10"></path>
+        <filter x="-6.1%" y="-9.6%" width="112.2%" height="119.2%" filterUnits="objectBoundingBox" id="filter-11">
+            <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.153135927 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-12">
+            <stop stop-color="#1A2231" offset="0%"></stop>
+            <stop stop-color="#0B0F16" offset="100%"></stop>
+        </linearGradient>
+        <path d="M12.8027754,14.7499434 C13.8685169,14.7412092 14.9342585,14.7368421 16,14.7368421 C17.0657415,14.7368421 18.1314831,14.7412092 19.1972246,14.7499434 C21.28392,14.7670406 22.9665072,16.4634738 22.9665072,18.5502392 C22.9665072,20.7035117 21.2693745,22.4741653 19.1180376,22.5654433 C18.0786917,22.6095337 17.0393459,22.6315789 16,22.6315789 C14.9606541,22.6315789 13.9213083,22.6095337 12.8819624,22.5654433 C10.7306255,22.4741653 9.03349282,20.7035117 9.03349282,18.5502392 C9.03349282,16.4634738 10.71608,14.7670406 12.8027754,14.7499434 Z" id="path-13"></path>
+        <filter x="-10.8%" y="-19.0%" width="121.5%" height="138.0%" filterUnits="objectBoundingBox" id="filter-14">
+            <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.197415865 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <ellipse id="path-15" cx="12.8421053" cy="18.5263158" rx="1.26315789" ry="1.89473684"></ellipse>
+        <filter x="-178.1%" y="-118.8%" width="456.3%" height="337.5%" filterUnits="objectBoundingBox" id="filter-16">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.392606707   0 0 0 0 0.430966992   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <ellipse id="path-17" cx="19.1578947" cy="18.5263158" rx="1.26315789" ry="1.89473684"></ellipse>
+        <filter x="-178.1%" y="-118.8%" width="456.3%" height="337.5%" filterUnits="objectBoundingBox" id="filter-18">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.392606707   0 0 0 0 0.430966992   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板">
+            <g id="编组-20备份-2">
+                <g id="机器人">
+                    <!-- 圆底背景不受转头动画影响 -->
+                    <circle id="bg" fill="url(#linearGradient-1)" cx="16" cy="16" r="16"></circle>
+                    
+                    <!-- 分离耳朵，进行差异位移与缩放，制造 3D 旋转的视差错觉 -->
+                    <g id="ear1-anim">
+                        <rect id="ear1" fill="#F0EFF4" x="4" y="16" width="3.78947368" height="4.42105263" rx="1.26315789"></rect>
+                    </g>
+                    <g id="ear2-anim">
+                        <rect id="ear2" fill="#F0EFF4" x="24.2105263" y="16" width="3.78947368" height="4.42105263" rx="1.26315789"></rect>
+                    </g>
+
+                    <!-- 白底与天线部分的位移 -->
+                    <g id="head-shape">
+                        <g id="head">
+                            <use fill="url(#linearGradient-2)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        </g>
+                        <g id="antenna">
+                            <use fill="url(#linearGradient-5)" fill-rule="evenodd" xlink:href="#path-6"></use>
+                            <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
+                        </g>
+                    </g>
+
+                    <!-- 最核心的眼睛部分：独立平移并宽度缩放压缩以制造圆柱透视 -->
+                    <g id="glasses-group">
+                        <g id="glasses-border">
+                            <use fill="url(#pattern-8)" fill-rule="evenodd" xlink:href="#path-10"></use>
+                            <use fill="black" fill-opacity="1" filter="url(#filter-11)" xlink:href="#path-10"></use>
+                        </g>
+                        <g id="glasses-bg">
+                            <use fill="url(#linearGradient-12)" fill-rule="evenodd" xlink:href="#path-13"></use>
+                            <use fill="black" fill-opacity="1" filter="url(#filter-14)" xlink:href="#path-13"></use>
+                        </g>
+                        <!-- 眼睛在整体基础上保留眨眼动画 -->
+                        <g id="eye2" transform="translate(12.842105, 18.526316) rotate(15.000000) translate(-12.842105, -18.526316) ">
+                            <g id="eye2-anim">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-16)" xlink:href="#path-15"></use>
+                                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-15"></use>
+                            </g>
+                        </g>
+                        <g id="eye1" transform="translate(19.157895, 18.526316) rotate(-15.000000) translate(-19.157895, -18.526316) ">
+                            <g id="eye1-anim">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-18)" xlink:href="#path-17"></use>
+                                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-17"></use>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+</body>
+</html>

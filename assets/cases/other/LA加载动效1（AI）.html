@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频打板Loading动画</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            margin: 0;
+        }
+        .video-loader {
+            width: 160px;
+            height: 160px;
+            overflow: visible;
+        }
+        .clapper-whole {
+            transform-origin: center center;
+            transform-box: fill-box;
+            animation: whole-bounce-rotate 1.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+        .clapper-top {
+            /* 旋转轴心调整到上半部分左下角：SVG坐标(5.37,23.02)，即自身的左下角 */
+            transform-origin: 5.37px 23.02px; /* 改为上半部分的左下角像素坐标，去掉错误的逗号 */
+            transform-box: fill-box;
+            /* 微调水平偏移实现精准对齐 */
+            transform: translate(2.38px, 6.27px);
+            animation: tap-action 1.8s infinite;
+        }
+        @keyframes tap-action {
+            0%, 5% { transform: translate(2.38px, 6.27px) rotate(0deg); }
+            35% { 
+                transform: translate(2.38px, 6.27px) rotate(-35deg); 
+                animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+            50% { transform: translate(2.38px, 6.27px) rotate(-35deg); }
+            58% { transform: translate(2.38px, 6.27px) rotate(0deg); }
+            100% { transform: translate(2.38px, 6.27px) rotate(0deg); }
+        }
+        @keyframes whole-bounce-rotate {
+            0%, 55% { transform: scale(1) rotate(0deg); }
+            58% { transform: scale(0.94) rotate(3deg); }
+            70% { transform: scale(1.02) rotate(-1.5deg); }
+            85%, 100% { transform: scale(1) rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <svg class="video-loader" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <g class="clapper-whole">
+            <!-- 下半部分（原始代码） -->
+            <g class="clapper-bottom">
+                <path d="M54,27 C55.1045695,27 56,27.8954305 56,29 L56,57 C56,59.209139 54.209139,61 52,61 L12,61 C9.790861,61 8,59.209139 8,57 L8,29 C8,27.8954305 8.8954305,27 10,27 L54,27 Z M54,29 L10,29 L10,57 C10,58.1045695 10.8954305,59 12,59 L52,59 C53.1045695,59 54,58.1045695 54,57 L54,29 Z" fill="#D4E5F4" fill-rule="nonzero"></path>
+                <path d="M27,38 C27,37.2301989 27.8333347,36.7490738 28.5,37.1339754 L39,43.1961754 C39.6666662,43.5810759 39.6666662,44.5433241 39,44.9282246 L28.5,50.9904246 C27.8333347,51.3753262 27,50.8942011 27,50.1244 L27,38 Z" fill="#2FCC92" fill-rule="nonzero"></path>
+            </g>
+            <!-- 上半部分（原始代码）- 覆盖下半部分线条 -->
+            <g class="clapper-top">
+                <path d="M9.37048652,9.02686213 L49.3704865,9.02686213 C51.5796255,9.02686213 53.3704865,10.8177231 53.3704865,13.0268621 L53.3704865,21.0268621 C53.3704865,22.1314316 52.475056,23.0268621 51.3704865,23.0268621 L5.37048652,23.0268621 L5.37048652,23.0268621 L5.37048652,13.0268621 C5.37048652,10.8177231 7.16134752,9.02686213 9.37048652,9.02686213 Z" fill="#F3F5F7"></path>
+                <path d="M49.3704865,9.02686213 C51.5796255,9.02686213 53.3704865,10.8177231 53.3704865,13.0268621 L53.3704865,21.0268621 C53.3704865,22.1314316 52.475056,23.0268621 51.3704865,23.0268621 L5.37048652,23.0268621 L5.37048652,13.0268621 C5.37048652,10.8177231 7.16134752,9.02686213 9.37048652,9.02686213 L49.3704865,9.02686213 Z M20.2344865,11.0268621 L9.37048652,11.0268621 C8.26591702,11.0268621 7.37048652,11.9222926 7.37048652,13.0268621 L7.37048652,21.0268621 L11.9004865,21.0268621 L20.2344865,11.0268621 Z M49.3704865,11.0268621 L46.8384865,11.0268621 L38.5054865,21.0268621 L51.3704865,21.0268621 L51.3704865,13.0268621 C51.3704865,11.9222926 50.475056,11.0268621 49.3704865,11.0268621 Z M44.2344865,11.0268621 L34.8384865,11.0268621 L26.5054865,21.0268621 L35.9004865,21.0268621 L44.2344865,11.0268621 Z M32.2344865,11.0268621 L22.8384865,11.0268621 L14.5054865,21.0268621 L23.9004865,21.0268621 L32.2344865,11.0268621 Z" fill="#D4E5F4" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </svg>
+</body>
+</html>

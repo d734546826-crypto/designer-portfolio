@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Paper Elastic Bounce - White Background</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff; /* 已修改为纯白 */
+            margin: 0;
+        }
+
+        svg {
+            width: 160px;
+            height: 160px;
+        }
+
+        /* ================== 核心配置 ================== */
+
+        #test-paper {
+            animation: loop-fade 2s linear infinite;
+            transform-origin: center top;
+            will-change: opacity, transform;
+        }
+
+        /* 1. 试卷主体：多重回弹 */
+        .bounce-wrapper {
+            animation: paper-elastic-bounce 2s infinite;
+        }
+
+        /* 2. 试卷生长：快速展开 */
+        #mask-paper-rect {
+            animation: paper-grow 2s cubic-bezier(0.3, 0, 0.2, 1) infinite;
+        }
+
+        /* 3. 文本行：带回弹的生长 */
+        .text-mask-rect {
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        #tm-1 { animation-name: text-elastic-1; } 
+        #tm-2 { animation-name: text-elastic-2; } 
+        #tm-3 { animation-name: text-elastic-3; } 
+
+
+        /* ================== 关键帧定义 ================== */
+
+        @keyframes loop-fade {
+            0% { opacity: 1; }
+            85% { opacity: 1; }
+            95% { opacity: 0; transform: scale(0.96); }
+            100% { opacity: 0; transform: scale(0.96); }
+        }
+
+        /* 多重阻尼回弹 */
+        @keyframes paper-elastic-bounce {
+            0% { transform: translateY(0); animation-timing-function: ease-in; }
+            18% { transform: translateY(6px); animation-timing-function: ease-out; }
+            32% { transform: translateY(-3px); animation-timing-function: ease-in-out; }
+            45% { transform: translateY(2px); animation-timing-function: ease-in-out; }
+            56% { transform: translateY(-1px); animation-timing-function: ease-in-out; }
+            68% { transform: translateY(0); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes paper-grow {
+            0% { height: 0; }
+            20% { height: 64px; }
+            100% { height: 64px; }
+        }
+
+        /* 文本弹性生长 (Overshoot) */
+        @keyframes text-elastic-1 {
+            0%, 5% { width: 0; }
+            22% { width: 55px; } /* 冲过头 */
+            30%, 100% { width: 50px; } /* 缩回 */
+        }
+
+        @keyframes text-elastic-2 {
+            0%, 15% { width: 0; }
+            32% { width: 55px; }
+            40%, 100% { width: 50px; }
+        }
+
+        @keyframes text-elastic-3 {
+            0%, 25% { width: 0; }
+            42% { width: 55px; }
+            50%, 100% { width: 50px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>test-paper</title>
+    <defs>
+        <!-- 试卷高度遮罩 -->
+        <clipPath id="cp-paper">
+            <rect id="mask-paper-rect" x="0" y="0" width="64" height="0" />
+        </clipPath>
+        <!-- 文本宽度遮罩 -->
+        <clipPath id="cp-text">
+            <rect id="tm-1" class="text-mask-rect" x="15" y="14" width="0" height="8" />
+            <rect id="tm-2" class="text-mask-rect" x="15" y="25" width="0" height="8" />
+            <rect id="tm-3" class="text-mask-rect" x="15" y="36" width="0" height="8" />
+        </clipPath>
+    </defs>
+
+    <g id="控件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="test-paper" transform="translate(32.000000, 32.000000) rotate(-360.000000) translate(-32.000000, -32.000000) translate(-0.000000, 0.000000)">
+            <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="64" height="64"></rect>
+            
+            <!-- 回弹动画包裹层 -->
+            <g class="bounce-wrapper">
+                <!-- 试卷生长遮罩层 -->
+                <g clip-path="url(#cp-paper)">
+                    <path d="M55.5,5 L13.5,5 C11.290861,5 9.5,6.790861 9.5,9 L9.5,54 C9.5,56.7614237 11.7385763,59 14.5,59 L47.5,59 L47.7168896,58.9953805 C50.3776933,58.8818181 52.5,56.6887547 52.5,54 L52.5,15 L55.5,15 L55.5,5 Z M53.5,7 L53.5,13 L50.5,13 L50.5,54 C50.5,55.6568542 49.1568542,57 47.5,57 L14.5,57 C12.8431458,57 11.5,55.6568542 11.5,54 L11.5,9 C11.5,7.8954305 12.3954305,7 13.5,7 L53.5,7 Z" id="形状结合" fill="#D4E5F4" fill-rule="nonzero"></path>
+                    <path d="M43.5,50 L43.5,54 C43.5,56.209139 45.290861,58 47.5,58 L8.5,58 C6.290861,58 4.5,56.209139 4.5,54 L4.5,50 L43.5,50 Z" id="形状结合" fill="#F3F5F7"></path>
+                    <path d="M8.5,59 L47.5,59 C48.7873563,59 48.8317479,57.1355529 47.6331748,57.0069704 L47.5,57 C45.8431458,57 44.5,55.6568542 44.5,54 L44.5,50 C44.5,49.4477153 44.0522847,49 43.5,49 L4.5,49 C3.94771525,49 3.5,49.4477153 3.5,50 L3.5,54 C3.5,56.7614237 5.73857625,59 8.5,59 Z M42.5,54 L42.5046195,54.2168896 C42.5475891,55.2236802 42.8882812,56.1533741 43.4408969,56.9201723 L43.501,57 L8.5,57 L8.32372721,56.9949073 C6.74891996,56.9036609 5.5,55.5976809 5.5,54 L5.5,51 L42.5,51 L42.5,54 Z" id="形状结合" fill="#D4E5F4" fill-rule="nonzero"></path>
+                    <path d="M55.5,6 C57.709139,6 59.5,7.790861 59.5,10 L59.5,14 L59.5,14 L51.5,14 L51.5,10 C51.5,7.790861 53.290861,6 55.5,6 Z" id="矩形" fill="#F3F5F7"></path>
+                    <path d="M55.5,5 C52.7385763,5 50.5,7.23857625 50.5,10 L50.5,14 C50.5,14.5522847 50.9477153,15 51.5,15 L59.5,15 C60.0522847,15 60.5,14.5522847 60.5,14 L60.5,10 C60.5,7.23857625 58.2614237,5 55.5,5 Z M55.5,7 L55.6762728,7.00509269 C57.25108,7.09633912 58.5,8.40231912 58.5,10 L58.5,13 L52.5,13 L52.5,10 C52.5,8.34314575 53.8431458,7 55.5,7 Z" id="矩形" fill="#D4E5F4" fill-rule="nonzero"></path>
+                    
+                    <!-- 文本部分 -->
+                    <path clip-path="url(#cp-text)" d="M19.5,26.5 L42.5,26.5 C43.3284271,26.5 44,27.1715729 44,28 C44,28.8284271 43.3284271,29.5 42.5,29.5 L19.5,29.5 C18.6715729,29.5 18,28.8284271 18,28 C18,27.1715729 18.6715729,26.5 19.5,26.5 Z M19.5,15.5 L29.5,15.5 C30.3284271,15.5 31,16.1715729 31,17 C31,17.8284271 30.3284271,18.5 29.5,18.5 L19.5,18.5 C18.6715729,18.5 18,17.8284271 18,17 C18,16.1715729 18.6715729,15.5 19.5,15.5 Z M19.5,37.5 L34.5,37.5 C35.3284271,37.5 36,38.1715729 36,39 C36,39.8284271 35.3284271,40.5 34.5,40.5 L19.5,40.5 C18.6715729,40.5 18,39.8284271 18,39 C18,38.1715729 18.6715729,37.5 19.5,37.5 Z" id="形状结合" fill="#2FCC92" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+
+</body>
+</html>
