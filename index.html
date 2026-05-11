@@ -110,6 +110,11 @@
             animation-delay: 0.56s;
         }
 
+        .hero-blueprint {
+            right: max(1.5rem, calc((100vw - 80rem) / 2 + 1.5rem));
+            width: min(54vw, 760px);
+        }
+
         @keyframes blueprint-line-cycle {
             0% {
                 stroke-dashoffset: var(--dash, 520);
@@ -199,6 +204,11 @@
 
         .case-modal-scroll {
             scrollbar-gutter: stable;
+        }
+
+        .case-content {
+            max-width: min(100%, 1360px);
+            margin: 0 auto;
         }
 
         .case-frame {
@@ -297,7 +307,7 @@
 
     <!-- 首页光效与右侧工程图层 -->
     <div class="absolute inset-0 pointer-events-none z-0 h-screen overflow-hidden">
-        <svg class="absolute right-0 top-24 hidden h-[620px] w-[54vw] max-w-[760px] text-brand opacity-85 md:block" viewBox="0 0 760 620" fill="none" aria-hidden="true">
+        <svg class="hero-blueprint absolute top-24 hidden h-[620px] text-brand opacity-85 md:block" viewBox="0 0 760 620" fill="none" aria-hidden="true">
             <g stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
                 <circle class="blueprint-line" style="--dash: 380" cx="260" cy="320" r="80"/>
                 <circle class="blueprint-line" style="--dash: 190" cx="260" cy="320" r="40"/>
@@ -436,6 +446,8 @@
                         <img
                             src="./assets/cases/jc/基础交互优化-0-封面.png"
                             alt="复杂系统基础交互重构案例封面"
+                            loading="lazy"
+                            decoding="async"
                             class="project-image h-full w-full object-cover transition-transform duration-700"
                         >
                         <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
@@ -459,6 +471,8 @@
                         <img
                             src="./assets/cases/la/learnanything-1-封面.png"
                             alt="LearnAnything 企业级 AI 文档转视频工具案例封面"
+                            loading="lazy"
+                            decoding="async"
                             class="project-image h-full w-full object-cover transition-transform duration-700"
                         >
                         <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
@@ -482,6 +496,8 @@
                         <img
                             src="./assets/cases/rq/入侵检测-1-封面.png"
                             alt="入侵检测安全运营案例封面"
+                            loading="lazy"
+                            decoding="async"
                             class="project-image h-full w-full object-cover transition-transform duration-700"
                         >
                         <div class="project-overlay absolute inset-0 bg-brand/90 opacity-0 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
@@ -651,8 +667,8 @@
                     <i class="ph ph-x text-xl"></i>
                 </button>
             </div>
-            <div class="case-modal-scroll overflow-y-auto rounded-2xl border border-dark-border bg-dark-900/80 p-4 pr-6 md:p-6 md:pr-8">
-                <div id="case-modal-content" class="space-y-5"></div>
+            <div class="case-modal-scroll min-h-0 flex-1 overflow-y-auto rounded-2xl border border-dark-border bg-dark-900/80 p-4 pr-6 md:p-6 md:pr-8">
+                <div id="case-modal-content" class="case-content space-y-5"></div>
             </div>
         </div>
     </div>
@@ -841,7 +857,7 @@
             if (item.type === 'video-frame') {
                 return `
                     <div class="case-frame relative" data-video-frame>
-                        <img src="${item.src}" alt="${item.alt}" class="w-full">
+                        <img src="${item.src}" alt="${item.alt}" class="w-full" loading="lazy" decoding="async">
                         <video
                             data-src="${item.video}"
                             class="absolute object-cover opacity-0 transition-opacity duration-300"
@@ -864,7 +880,7 @@
                 `;
             }
 
-            return `<div class="case-frame"><img src="${item.src}" alt="${item.alt}"></div>`;
+            return `<div class="case-frame"><img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async"></div>`;
         };
 
         const renderCaseStudy = caseId => {
@@ -1150,7 +1166,7 @@
                 distortion: 0.1
             };
 
-            let dpr = Math.min(window.devicePixelRatio || 1, 2);
+            let dpr = Math.min(window.devicePixelRatio || 1, 1.25);
             let mouse = { x: 0.5, y: 0.5 };
             let smoothMouse = { x: 0.5, y: 0.5 };
             let w, h, anchor, dir;
@@ -1209,8 +1225,18 @@
             reqId = requestAnimationFrame(render);
         }
 
-        // 初始化光效，使用主题色橘色
-        initLightRays('light-rays', { raysColor: '#FF5C00' });
+        // 延后初始化 WebGL 光效，避免阻塞首屏内容渲染。
+        const startLightRays = () => {
+            const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            initLightRays('light-rays', { raysColor: '#FF5C00' });
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(startLightRays, { timeout: 1800 });
+        } else {
+            window.addEventListener('load', () => window.setTimeout(startLightRays, 400), { once: true });
+        }
     </script>
 </body>
 </html>
