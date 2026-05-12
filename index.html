@@ -293,7 +293,7 @@
                 <a href="#work" class="hover:text-white transition-colors">作品</a>
                 <a href="#experience" class="hover:text-white transition-colors">经历</a>
                 <a href="#about" class="hover:text-white transition-colors">关于</a>
-                <a href="mailto:734546826@qq.com" class="px-5 py-2.5 bg-white text-dark-900 rounded-full hover:bg-brand hover:text-white transition-all duration-300 font-semibold">
+                <a href="./assets/resume/du-mingxuan-uiux-resume.pdf" target="_blank" rel="noreferrer" class="px-5 py-2.5 bg-white text-dark-900 rounded-full hover:bg-brand hover:text-white transition-all duration-300 font-semibold">
                     联系我
                 </a>
             </div>
@@ -378,7 +378,7 @@
                         查看作品
                         <i class="ph ph-arrow-down-right text-xl group-hover:translate-x-1 group-hover:translate-y-1 transition-transform"></i>
                     </a>
-                    <a href="mailto:734546826@qq.com?subject=简历请求" class="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors group">
+                    <a href="./assets/resume/du-mingxuan-uiux-resume.pdf" target="_blank" rel="noreferrer" class="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors group">
                         获取简历
                         <i class="ph ph-file-pdf text-xl"></i>
                     </a>
@@ -640,8 +640,8 @@
             <p class="mx-auto mb-7 max-w-xl text-sm leading-relaxed text-gray-400 md:text-base">
                 如果您正在寻找一位能深入理解业务逻辑，并产出高质量 B 端设计方案的设计师，欢迎随时与我联系。
             </p>
-            <a href="mailto:734546826@qq.com" class="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-hover">
-                获取简历 <i class="ph ph-envelope-simple text-lg"></i>
+            <a href="./assets/resume/du-mingxuan-uiux-resume.pdf" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-hover">
+                获取简历 <i class="ph ph-file-pdf text-lg"></i>
             </a>
         </div>
 
@@ -993,6 +993,11 @@
         document.addEventListener('keydown', event => {
             if (event.key === 'Escape') closeCaseModal();
         });
+
+        const initialCaseId = new URLSearchParams(window.location.search).get('case');
+        if (initialCaseId && caseStudies[initialCaseId]) {
+            window.setTimeout(() => openCaseModal(initialCaseId), 120);
+        }
 
         // 光效动画 (WebGL Vanilla JS Implementation of React Bits LightRays)
         function initLightRays(containerId, options = {}) {

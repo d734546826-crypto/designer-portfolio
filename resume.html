@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>杜明轩 - UI/UX 设计师简历</title>
+    <style>
+        :root {
+            --ink: #151515;
+            --muted: #6f6f6f;
+            --line: #e6e1db;
+            --paper: #fffaf3;
+            --accent: #ff5c00;
+            --accent-soft: #fff0e5;
+            --panel: #f7f0e7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            background: #e9e3dc;
+            color: var(--ink);
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.48;
+        }
+
+        body {
+            padding: 24px;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 24px 80px rgba(32, 24, 16, 0.18);
+            padding: 13mm 13mm 12mm;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page::before {
+            content: none;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(to right, rgba(21, 21, 21, 0.045) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(21, 21, 21, 0.045) 1px, transparent 1px);
+            background-size: 8mm 8mm;
+            background-position: 13mm 13mm;
+            mask-image: linear-gradient(to bottom, black, transparent 68%);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: 1fr 33mm;
+            gap: 4mm;
+            align-items: stretch;
+            padding-bottom: 6mm;
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .eyebrow {
+            margin: 0 0 2.6mm;
+            color: var(--accent);
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+
+        .role {
+            margin: 2mm 0 0;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .summary {
+            max-width: 132mm;
+            margin: 3mm 0 0;
+            color: #3d3d3d;
+            font-size: 10.6px;
+        }
+
+        .photo {
+            width: 33mm;
+            height: 100%;
+            min-height: 38mm;
+            border: 1px solid var(--ink);
+            background:
+                radial-gradient(circle at 70% 20%, rgba(255, 92, 0, 0.18), transparent 30%),
+                repeating-linear-gradient(135deg, rgba(21, 21, 21, 0.08) 0 1px, transparent 1px 7px),
+                var(--panel);
+            display: grid;
+            place-items: center;
+            text-align: center;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            overflow: hidden;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 34%;
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2mm;
+            margin: 3mm 0 0;
+        }
+
+        .meta div {
+            padding-top: 0;
+        }
+
+        .meta span {
+            display: block;
+            color: var(--muted);
+            font-size: 7.5px;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .meta strong {
+            display: block;
+            margin-top: 1mm;
+            font-size: 10px;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 54mm 1fr;
+            gap: 8mm;
+            margin-top: 6.5mm;
+            min-height: 211mm;
+        }
+
+        aside,
+        .main > main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        aside {
+            gap: 5.6mm;
+        }
+
+        .main > main {
+            gap: 6mm;
+        }
+
+        .main > main section:last-child {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        section {
+            break-inside: avoid;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            margin: 0 0 2.2mm;
+            font-size: 14px;
+            letter-spacing: 0.08em;
+        }
+
+        .main > main section:nth-child(-n + 3) h2 {
+            margin-bottom: 4.4mm;
+        }
+
+        h2::before {
+            content: "";
+            flex: 0 0 auto;
+            width: 5px;
+            height: 5px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        section > :not(h2) {
+            margin-left: calc(5px + 2mm);
+        }
+
+        .side-card {
+            padding: 4mm;
+            background: rgba(255, 255, 255, 0.42);
+            border: 1px solid var(--line);
+        }
+
+        .side-card:nth-child(3) {
+            flex: 1;
+        }
+
+        .contact-list,
+        .skill-list,
+        .plain-list {
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .contact-list li,
+        .plain-list li {
+            padding: 1.8mm 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 9.8px;
+        }
+
+        .contact-list li:last-child,
+        .plain-list li:last-child {
+            border-bottom: 0;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 0.8mm;
+            color: var(--muted);
+            font-size: 7.5px;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .contact-list strong {
+            display: block;
+            color: var(--ink);
+            font-size: 10px;
+            font-weight: 500;
+            line-height: 1.36;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-link {
+            color: #1d5fd1;
+            text-decoration: underline;
+            text-underline-offset: 1.2px;
+            word-break: break-all;
+        }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.8mm;
+        }
+
+        .skill-list li {
+            display: flex;
+            align-items: center;
+            min-height: 8.6mm;
+            gap: 1.6mm;
+            padding: 1.5mm 1.8mm;
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 0;
+            font-size: 9.5px;
+            font-weight: 700;
+            min-width: 0;
+            line-height: 9.5px;
+        }
+
+        .skill-logo,
+        .skill-icon {
+            flex: 0 0 auto;
+            width: 14px;
+            height: 14px;
+        }
+
+        .skill-logo {
+            display: block;
+            object-fit: contain;
+        }
+
+        .skill-logo-ps {
+            transform: translateY(-0.2mm);
+        }
+
+        .skill-logo-openai {
+            object-fit: cover;
+            object-position: left center;
+            width: 14px;
+        }
+
+        .skill-icon {
+            display: inline-grid;
+            place-items: center;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(255, 92, 0, 0.25);
+            color: var(--accent);
+        }
+
+        .skill-icon svg {
+            width: 10px;
+            height: 10px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 18mm 1fr;
+            gap: 1.2mm;
+            padding-bottom: 5mm;
+            margin-bottom: 5mm;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .date {
+            color: var(--accent);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        .date-break {
+            display: block;
+            margin-top: 0.6mm;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.25;
+        }
+
+        .company {
+            margin: 0.8mm 0 1.5mm;
+            color: var(--muted);
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .bullets {
+            margin: 0;
+            padding-left: 3.2mm;
+            color: #383838;
+            font-size: 9.8px;
+        }
+
+        .bullets li {
+            margin-bottom: 1mm;
+        }
+
+        .project {
+            padding: 3.45mm 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .project:first-of-type {
+            padding-top: 0;
+        }
+
+        .project:last-child {
+            border-bottom: 0;
+        }
+
+        .project-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 4mm;
+        }
+
+        .project-title-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5mm;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .project-title-link svg {
+            width: 12px;
+            height: 12px;
+            color: var(--accent);
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 5.2mm;
+            white-space: nowrap;
+            padding: 0 1.6mm;
+            border: 1px solid rgba(255, 92, 0, 0.35);
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 999px;
+            font-size: 7.6px;
+            line-height: 7.6px;
+            font-weight: 800;
+        }
+
+        .project p {
+            margin: 1mm 0 0;
+            color: #383838;
+            font-size: 9.8px;
+        }
+
+        .quote {
+            margin-top: 2mm;
+            color: #2e2e2e;
+            font-size: 9.8px;
+            font-weight: 700;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            flex: 1;
+            gap: 3mm;
+        }
+
+        .method-item {
+            padding: 3.2mm;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .method-item strong {
+            display: block;
+            margin-bottom: 1.2mm;
+            color: var(--accent);
+            font-size: 11.2px;
+            letter-spacing: 0.08em;
+        }
+
+        .method-item span {
+            display: block;
+            color: #383838;
+            font-size: 9.4px;
+            line-height: 1.5;
+        }
+
+        .print-tip {
+            width: 210mm;
+            margin: 12px auto 0;
+            color: #70675f;
+            font-size: 12px;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .page {
+                width: 210mm;
+                min-height: 297mm;
+                box-shadow: none;
+            }
+
+            .print-tip {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article class="page">
+        <div class="content">
+            <header>
+                <div>
+                    <p class="eyebrow">UI/UX DESIGNER · AI-POWERED PRODUCT EXPERIENCE</p>
+                    <h1>杜明轩</h1>
+                    <p class="role">B 端 UI/UX 设计师 / 企业级产品体验设计</p>
+                    <p class="summary">
+                        5 年 B 端与数字产品设计经验，长期负责安全产品、AI 效率工具与企业级系统设计。擅长将复杂业务逻辑转化为清晰、克制、高效的产品体验，并将 GPT 与生成式工具融入设计调研、方案表达和动效探索。
+                    </p>
+                    <div class="meta">
+                        <div><span>Gender</span><strong>男</strong></div>
+                        <div><span>Age</span><strong>27</strong></div>
+                        <div><span>Exp.</span><strong>5 年</strong></div>
+                        <div><span>Degree</span><strong>本科</strong></div>
+                        <div><span>Target</span><strong>UI/UX</strong></div>
+                    </div>
+                </div>
+                <div class="photo">
+                    <img src="./assets/resume/photo.jpg" alt="杜明轩照片">
+                </div>
+            </header>
+
+            <div class="main">
+                <aside>
+                    <section class="side-card">
+                        <h2>联系信息</h2>
+                        <ul class="contact-list">
+                            <li><span class="label">Phone</span><strong>17764012429</strong></li>
+                            <li><span class="label">Email</span><strong>734546826@qq.com</strong></li>
+                            <li><span class="label">Portfolio</span><strong><a class="contact-link" href="https://d734546826-crypto.github.io/designer-portfolio/" target="_blank" rel="noreferrer">d734546826-crypto.github.io/designer-portfolio</a></strong></li>
+                            <li><span class="label">Location</span><strong>广州</strong></li>
+                        </ul>
+                    </section>
+
+                    <section class="side-card">
+                        <h2>专业技能</h2>
+                        <ul class="skill-list">
+                            <li><img class="skill-logo" src="./assets/resume/logos/figma.svg" alt="">Figma</li>
+                            <li><img class="skill-logo" src="./assets/resume/logos/sketch.svg" alt="">Sketch</li>
+                            <li><img class="skill-logo skill-logo-ps" src="./assets/resume/logos/photoshop.svg" alt="">PS</li>
+                            <li><img class="skill-logo" src="./assets/resume/logos/aftereffects.svg" alt="">AE</li>
+                            <li><img class="skill-logo skill-logo-openai" src="./assets/resume/logos/openai.svg" alt="">GPT</li>
+                            <li><img class="skill-logo" src="./assets/resume/logos/codex.png" alt="">Codex</li>
+                        </ul>
+                    </section>
+
+                    <section class="side-card">
+                        <h2>核心能力</h2>
+                        <ul class="plain-list">
+                            <li>复杂业务流程梳理与信息架构设计</li>
+                            <li>高密度信息场景下的体验效率优化</li>
+                            <li>企业级视觉规范、组件资产与设计系统维护</li>
+                            <li>AI 产品体验与动效探索</li>
+                        </ul>
+                    </section>
+
+                    <section class="side-card">
+                        <h2>教育背景</h2>
+                        <ul class="contact-list">
+                            <li><span class="label">2016 - 2020</span>江汉大学 · 视觉传达设计专业</li>
+                        </ul>
+                    </section>
+                </aside>
+
+                <main>
+                    <section>
+                        <h2>个人优势</h2>
+                        <p class="quote">
+                            以业务理解建立设计判断，以克制视觉承载复杂信息，以 AI 工具提升探索和表达效率。
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>工作经历</h2>
+                        <div class="timeline-item">
+                            <div class="date">2020.09 -<span class="date-break">至今</span></div>
+                            <div>
+                                <h3>青藤云安全 · 中级 UI/UX 设计师</h3>
+                                <p class="company">核心安全产品视觉、体验与动效设计</p>
+                                <ul class="bullets">
+                                    <li>负责多个 B 端安全产品体验设计，覆盖告警监控、事件研判、检测分析与处置流转。</li>
+                                    <li>将高密度安全信息转化为清晰、可操作的界面结构，提升复杂任务判断效率。</li>
+                                    <li>参与视觉规范、组件资产与动效表达建设，并探索 GPT / AI 工具提升设计效率。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="date">2019.07 - 2019.12</div>
+                            <div>
+                                <h3>航班管家 · 高铁管家设计部视觉设计实习生</h3>
+                                <p class="company">运营设计 / 页面设计 / 动效设计</p>
+                                <ul class="bullets">
+                                    <li>参与基础组件库与运营组件库维护。</li>
+                                    <li>负责运营页面、视觉设计与轻量动效支持。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>精选项目</h2>
+                        <div class="project">
+                            <div class="project-head">
+                                <h3><a class="project-title-link" href="./index.html?case=jc" target="_blank" rel="noreferrer">复杂系统基础交互重构<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg></a></h3>
+                                <span class="tag">表格 / 筛选</span>
+                            </div>
+                            <p>围绕复杂管理场景，系统优化表格、筛选、信息呈现与批量操作，降低理解成本。</p>
+                        </div>
+
+                        <div class="project">
+                            <div class="project-head">
+                                <h3><a class="project-title-link" href="./index.html?case=la" target="_blank" rel="noreferrer">LearnAnything AI 文档转视频工具<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg></a></h3>
+                                <span class="tag">AI 效率工具</span>
+                            </div>
+                            <p>设计 AI 文档转视频流程，覆盖文档输入、生成等待、结果预览与内容调整链路。</p>
+                        </div>
+
+                        <div class="project">
+                            <div class="project-head">
+                                <h3><a class="project-title-link" href="./index.html?case=rq" target="_blank" rel="noreferrer">入侵检测安全运营体验设计<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg></a></h3>
+                                <span class="tag">安全产品</span>
+                            </div>
+                            <p>优化告警监控、事件研判与响应处置链路，提升风险识别和运营处置效率。</p>
+                        </div>
+
+                        <div class="project">
+                            <div class="project-head">
+                                <h3><a class="project-title-link" href="./index.html?case=motion" target="_blank" rel="noreferrer">动效设计与微交互合集<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg></a></h3>
+                                <span class="tag">Motion / AI</span>
+                            </div>
+                            <p>覆盖首页氛围、加载反馈、品牌运营和移动端状态动效，部分方案由 AI 辅助生成。</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>设计方法</h2>
+                        <div class="method-grid">
+                            <div class="method-item">
+                                <strong>JCD 业务拆解</strong>
+                                <span>以 Job 为中心梳理角色任务、场景约束与信息密度，定位关键体验问题。</span>
+                            </div>
+                            <div class="method-item">
+                                <strong>结构表达</strong>
+                                <span>用信息架构、组件规范和动效反馈承载复杂 B 端产品逻辑。</span>
+                            </div>
+                            <div class="method-item">
+                                <strong>AI 赋能</strong>
+                                <span>结合 GPT 与生成式工具，提高调研、表达和动效探索效率。</span>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </article>
+</body>
+</html>
