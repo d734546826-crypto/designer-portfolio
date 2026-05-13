@@ -246,6 +246,18 @@
             animation: motion-cover-bar 3.6s ease-in-out infinite;
         }
 
+        .skill-tag-logo {
+            display: block;
+            width: 1rem;
+            height: 1rem;
+            object-fit: contain;
+        }
+
+        .skill-tag-logo-openai {
+            object-fit: cover;
+            object-position: left center;
+        }
+
         @keyframes motion-cover-morph {
             0%,
             100% {
@@ -290,10 +302,10 @@
                 XXCTS
             </a>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-                <a href="#work" class="hover:text-white transition-colors">作品</a>
-                <a href="#experience" class="hover:text-white transition-colors">经历</a>
                 <a href="#about" class="hover:text-white transition-colors">关于</a>
-                <a href="./assets/resume/du-mingxuan-uiux-resume.pdf" target="_blank" rel="noreferrer" class="px-5 py-2.5 bg-white text-dark-900 rounded-full hover:bg-brand hover:text-white transition-all duration-300 font-semibold">
+                <a href="#experience" class="hover:text-white transition-colors">经历</a>
+                <a href="#work" class="hover:text-white transition-colors">作品</a>
+                <a href="#contact" class="px-5 py-2.5 bg-white text-dark-900 rounded-full hover:bg-brand hover:text-white transition-all duration-300 font-semibold">
                     联系我
                 </a>
             </div>
@@ -366,8 +378,8 @@
                     UI/UX DESIGNER · AI-POWERED B-END DESIGN
                 </div>
                 <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.16] mb-8">
-                    构建<span class="text-brand">高效</span>、克制的<br />
-                    企业级数字产品。
+                    构建<span class="text-brand">高效</span>、<br class="sm:hidden" />克制的<br />
+                    企业级<br class="sm:hidden" />数字产品。
                 </h1>
                 <p class="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mb-12">
                     我是一名专注于 B 端领域的资深 UI/UX 设计师。<br />
@@ -386,45 +398,135 @@
             </div>
         </section>
 
-        <!-- Personal Info Section -->
-        <section id="about" class="max-w-7xl mx-auto px-6 pb-12">
-            <div class="border-y border-dark-border py-8">
-                <div class="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-6">
-                    <div>
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Name</p>
-                        <p class="text-lg font-bold text-white">杜明轩</p>
+        <!-- About Section -->
+        <section id="about" class="max-w-7xl mx-auto px-6 pb-20">
+            <div class="border-y border-dark-border py-12 md:py-16">
+                <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+                    <div class="lg:col-span-4">
+                        <h2 class="text-3xl font-bold text-white">关于我</h2>
+                        <p class="mt-6 text-base leading-relaxed text-gray-400">
+                            5 年 B 端与数字产品设计经验，长期负责安全产品、AI 效率工具与企业级系统设计。擅长将复杂业务逻辑转化为清晰、克制、高效的产品体验，并将 GPT 与生成式工具融入设计调研、方案表达和动效探索。
+                        </p>
                     </div>
-                    <div>
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Gender</p>
-                        <p class="text-lg font-bold text-white">男</p>
-                    </div>
-                    <div>
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Age</p>
-                        <p class="text-lg font-bold text-white">27</p>
-                    </div>
-                    <div>
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Experience</p>
-                        <p class="text-lg font-bold text-white">5 年</p>
-                    </div>
-                    <div>
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Degree</p>
-                        <p class="text-lg font-bold text-white">本科</p>
-                    </div>
-                    <div>
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">Focus</p>
-                        <p class="text-lg font-bold text-white">B 端体验设计</p>
+
+                    <div class="lg:col-span-8">
+                        <div class="grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2">
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Name</span>
+                                <strong class="text-lg text-white">杜明轩</strong>
+                            </div>
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Phone</span>
+                                <strong class="text-lg text-white">17764012429</strong>
+                            </div>
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Email</span>
+                                <strong class="break-all text-lg text-white">734546826@qq.com</strong>
+                            </div>
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Location</span>
+                                <strong class="text-lg text-white">广州</strong>
+                            </div>
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Exp.</span>
+                                <strong class="text-lg text-white">5 年</strong>
+                            </div>
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Degree</span>
+                                <strong class="text-lg text-white">本科</strong>
+                            </div>
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Gender</span>
+                                <strong class="text-lg text-white">男</strong>
+                            </div>
+                            <div class="grid grid-cols-[5rem_1fr] items-baseline gap-4 border-b border-dark-border pb-4">
+                                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Age</span>
+                                <strong class="text-lg text-white">27</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <span class="inline-flex items-center gap-2 rounded-full border border-dark-border px-3.5 py-2 text-xs font-semibold uppercase tracking-wide text-gray-300"><img class="skill-tag-logo" src="./assets/resume/logos/figma.svg" alt="">Figma</span>
+                            <span class="inline-flex items-center gap-2 rounded-full border border-dark-border px-3.5 py-2 text-xs font-semibold uppercase tracking-wide text-gray-300"><img class="skill-tag-logo" src="./assets/resume/logos/sketch.svg" alt="">Sketch</span>
+                            <span class="inline-flex items-center gap-2 rounded-full border border-dark-border px-3.5 py-2 text-xs font-semibold uppercase tracking-wide text-gray-300"><img class="skill-tag-logo" src="./assets/resume/logos/photoshop.svg" alt="">PS</span>
+                            <span class="inline-flex items-center gap-2 rounded-full border border-dark-border px-3.5 py-2 text-xs font-semibold uppercase tracking-wide text-gray-300"><img class="skill-tag-logo" src="./assets/resume/logos/aftereffects.svg" alt="">AE</span>
+                            <span class="inline-flex items-center gap-2 rounded-full border border-dark-border px-3.5 py-2 text-xs font-semibold uppercase tracking-wide text-gray-300"><img class="skill-tag-logo" src="./assets/resume/logos/openai-white.svg" alt="">GPT</span>
+                            <span class="inline-flex items-center gap-2 rounded-full border border-dark-border px-3.5 py-2 text-xs font-semibold uppercase tracking-wide text-gray-300"><img class="skill-tag-logo" src="./assets/resume/logos/codex.png" alt="">Codex</span>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-8 flex flex-col gap-4 border-t border-dark-border pt-6 md:flex-row md:items-center md:justify-between">
-                    <p class="text-sm leading-relaxed text-gray-400 md:max-w-xl">
-                        用结构化设计能力处理复杂业务问题，同时将 AI 融入调研、表达与动效探索，让设计从体验交付延伸到效率赋能。
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">Sketch</span>
-                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">Figma</span>
-                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">PS</span>
-                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">AE</span>
-                        <span class="rounded-full border border-dark-border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-300">GPT</span>
+            </div>
+        </section>
+
+        <!-- Experience & Philosophy -->
+        <section id="experience" class="max-w-7xl mx-auto px-6 py-20">
+            <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+                <div class="lg:col-span-7">
+                    <div class="space-y-12 relative before:absolute before:inset-y-0 before:left-3 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark-border before:to-transparent md:before:left-1/2 md:before:-translate-x-1/2">
+                        <div class="relative flex pl-12 md:items-center md:justify-normal md:pl-0 md:odd:flex-row-reverse group is-active">
+                            <div class="absolute left-0 top-8 z-10 h-6 w-6 rounded-full border-4 border-dark-900 bg-brand shadow md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"></div>
+                            <div class="w-full p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-brand/50 transition-colors md:w-[calc(50%-2rem)]">
+                                <div class="flex flex-col mb-2">
+                                    <span class="text-brand text-sm font-semibold mb-1">2020.09 至今</span>
+                                    <h4 class="text-lg font-bold text-white">中级 UI/UX 设计师</h4>
+                                </div>
+                                <div class="text-gray-500 text-sm mb-4">青藤云安全</div>
+                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
+                                    <li>负责多个核心安全产品的视觉、体验与动效设计，覆盖告警监控、事件研判、配置管理等复杂 B 端场景。</li>
+                                    <li>参与产品从需求理解、交互方案、视觉落地到研发协作的完整流程，推动安全业务体验持续优化。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="relative flex pl-12 md:items-center md:justify-normal md:pl-0 md:odd:flex-row-reverse group">
+                            <div class="absolute left-0 top-8 z-10 h-6 w-6 rounded-full border-4 border-dark-900 bg-dark-700 shadow transition-colors group-hover:bg-brand md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"></div>
+                            <div class="w-full p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-dark-600 transition-colors md:w-[calc(50%-2rem)]">
+                                <div class="flex flex-col mb-2">
+                                    <span class="text-gray-400 text-sm font-semibold mb-1">2019.07 - 2019.12</span>
+                                    <h4 class="text-lg font-bold text-white">视觉设计实习生</h4>
+                                </div>
+                                <div class="text-gray-500 text-sm mb-4">航班管家 · 高铁管家设计部</div>
+                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
+                                    <li>参与基础组件库与运营组件库的运营维护，协助提升设计资产复用效率。</li>
+                                    <li>负责运营设计、页面设计与动效设计支持，积累从视觉表达到业务转化的设计经验。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="relative flex pl-12 md:items-center md:justify-normal md:pl-0 md:odd:flex-row-reverse group">
+                            <div class="absolute left-0 top-8 z-10 h-6 w-6 rounded-full border-4 border-dark-900 bg-dark-700 shadow transition-colors group-hover:bg-brand md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"></div>
+                            <div class="w-full p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-dark-600 transition-colors md:w-[calc(50%-2rem)]">
+                                <div class="flex flex-col mb-2">
+                                    <span class="text-gray-400 text-sm font-semibold mb-1">2016 - 2020</span>
+                                    <h4 class="text-lg font-bold text-white">视觉传达设计专业</h4>
+                                </div>
+                                <div class="text-gray-500 text-sm mb-4">江汉大学</div>
+                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
+                                    <li>系统学习视觉设计、版式构成、品牌表达与信息传达方法，建立扎实的视觉基础。</li>
+                                    <li>在平面视觉与数字界面之间形成跨媒介设计思维，为后续 UI/UX 设计实践打下基础。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="sticky top-28 border-l border-dark-border pl-8">
+                        <h2 class="text-3xl font-bold text-white mb-8">设计理念</h2>
+                        <div class="space-y-8">
+                            <div>
+                                <div class="text-brand font-bold mb-2">01. 逻辑重于表现</div>
+                                <p class="text-gray-400 text-sm leading-relaxed">在 B 端设计中，理清业务链路永远是第一位的。视觉应当服务于信息层级与操作效率，而非喧宾夺主。</p>
+                            </div>
+                            <div>
+                                <div class="text-brand font-bold mb-2">02. 克制与统一</div>
+                                <p class="text-gray-400 text-sm leading-relaxed">减少无意义的装饰，保持全局组件和交互模式的统一，降低用户的学习成本，建立产品信任感。</p>
+                            </div>
+                            <div>
+                                <div class="text-brand font-bold mb-2">03. 面向落地的体验设计</div>
+                                <p class="text-gray-400 text-sm leading-relaxed">关注方案在研发实现、资源投入和迭代节奏中的真实成本，提前规避高成本低收益的设计决策，让设计更容易被团队推进和落地。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -552,89 +654,10 @@
             </div>
         </section>
 
-        <!-- Experience & Philosophy -->
-        <section id="experience" class="max-w-7xl mx-auto px-6 py-24 border-t border-dark-border mt-12">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
-                
-                <div class="md:col-span-4">
-                    <h2 class="text-3xl font-bold text-white mb-6">设计理念</h2>
-                    <div class="space-y-8">
-                        <div>
-                            <div class="text-brand font-bold mb-2">01. 逻辑重于表现</div>
-                            <p class="text-gray-400 text-sm leading-relaxed">在 B 端设计中，理清业务链路永远是第一位的。视觉应当服务于信息层级与操作效率，而非喧宾夺主。</p>
-                        </div>
-                        <div>
-                            <div class="text-brand font-bold mb-2">02. 克制与统一</div>
-                            <p class="text-gray-400 text-sm leading-relaxed">减少无意义的装饰，保持全局组件和交互模式的统一，降低用户的学习成本，建立产品信任感。</p>
-                        </div>
-                        <div>
-                            <div class="text-brand font-bold mb-2">03. 懂技术的体验设计</div>
-                            <p class="text-gray-400 text-sm leading-relaxed">理解前端框架和实现成本，能产出可落地的高质量设计方案，与研发团队顺畅协作。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="md:col-span-8">
-                    <div class="space-y-12 relative before:absolute before:inset-y-0 before:left-3 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-dark-border before:to-transparent md:before:left-1/2 md:before:-translate-x-1/2">
-                        
-                        <!-- Timeline Item -->
-                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                            <div class="absolute left-0 top-1/2 z-10 h-6 w-6 -translate-y-1/2 rounded-full border-4 border-dark-900 bg-brand shadow md:left-1/2 md:-translate-x-1/2"></div>
-                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-brand/50 transition-colors">
-                                <div class="flex flex-col mb-2">
-                                    <span class="text-brand text-sm font-semibold mb-1">2020.09 至今</span>
-                                    <h4 class="text-lg font-bold text-white">中级 UI/UX 设计师</h4>
-                                </div>
-                                <div class="text-gray-500 text-sm mb-4">青藤云安全</div>
-                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
-                                    <li>负责多个核心安全产品的视觉、体验与动效设计，覆盖告警监控、事件研判、配置管理等复杂 B 端场景。</li>
-                                    <li>参与产品从需求理解、交互方案、视觉落地到研发协作的完整流程，推动安全业务体验持续优化。</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                            <div class="absolute left-0 top-1/2 z-10 h-6 w-6 -translate-y-1/2 rounded-full border-4 border-dark-900 bg-dark-700 shadow transition-colors group-hover:bg-brand md:left-1/2 md:-translate-x-1/2"></div>
-                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-dark-600 transition-colors">
-                                <div class="flex flex-col mb-2">
-                                    <span class="text-gray-400 text-sm font-semibold mb-1">2019.07 - 2019.12</span>
-                                    <h4 class="text-lg font-bold text-white">视觉设计实习生</h4>
-                                </div>
-                                <div class="text-gray-500 text-sm mb-4">航班管家 · 高铁管家设计部</div>
-                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
-                                    <li>参与基础组件库与运营组件库的运营维护，协助提升设计资产复用效率。</li>
-                                    <li>负责运营设计、页面设计与动效设计支持，积累从视觉表达到业务转化的设计经验。</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                            <div class="absolute left-0 top-1/2 z-10 h-6 w-6 -translate-y-1/2 rounded-full border-4 border-dark-900 bg-dark-700 shadow transition-colors group-hover:bg-brand md:left-1/2 md:-translate-x-1/2"></div>
-                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2rem)] p-6 rounded-2xl bg-dark-800 border border-dark-border hover:border-dark-600 transition-colors">
-                                <div class="flex flex-col mb-2">
-                                    <span class="text-gray-400 text-sm font-semibold mb-1">2016 - 2020</span>
-                                    <h4 class="text-lg font-bold text-white">视觉传达设计专业</h4>
-                                </div>
-                                <div class="text-gray-500 text-sm mb-4">江汉大学</div>
-                                <ul class="text-gray-400 text-sm space-y-2 list-disc list-outside ml-4">
-                                    <li>系统学习视觉设计、版式构成、品牌表达与信息传达方法，建立扎实的视觉基础。</li>
-                                    <li>在平面视觉与数字界面之间形成跨媒介设计思维，为后续 UI/UX 设计实践打下基础。</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="mt-20 border-t border-dark-border bg-dark-900 pt-16 pb-10">
+    <footer id="contact" class="mt-20 border-t border-dark-border bg-dark-900 pt-16 pb-10">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">联系我</h2>
             <p class="mx-auto mb-7 max-w-xl text-sm leading-relaxed text-gray-400 md:text-base">
